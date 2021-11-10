@@ -15,7 +15,7 @@
 <meta property="og:description" content="从Java版本1.0开始就支持日期和时间，主要通过java.util.Date类。 但是，Date类设计不佳。 例如，Date中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时java.util.Calendar被引入来接管Date中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替代品">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-10T06:41:15.000Z">
-<meta property="article:modified_time" content="2021-11-10T07:04:08.266Z">
+<meta property="article:modified_time" content="2021-11-10T07:08:51.692Z">
 <meta property="article:author" content="Yannnn">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -107,11 +107,11 @@
 <hr>
 <h1 id="Instant类"><a href="#Instant类" class="headerlink" title="Instant类"></a>Instant类</h1><p><code>Instant</code>实例表示时间线上的一个点。 参考点是标准的Java纪元(epoch)，即1970-01-01T00：00：00Z（1970年1月1日00:00 GMT）。 <code>Instant类的</code>EPOCH<code>属性返回表示Java纪元的</code>Instant`实例。 在纪元之后的时间是正值，而在此之前的时间即是负值。</p>
 <p><code>Instant</code>的静态<code>now</code>方法返回一个表示当前时间的<code>Instant</code>对象：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Instant now = Instant.now();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Instant now = Instant.now();</span><br></pre></td></tr></table></figure>
 
 <p><code>getEpochSecond</code>方法返回自纪元以来经过的秒数。 <code>getNano</code>方法返回自上一秒开始以来的纳秒数。</p>
 <p><code>Instant</code>类的一个常用用途是用来操作时间，如以下代码所示。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.time.Duration;</span><br><span class="line"></span><br><span class="line">import java.time.Instant;</span><br><span class="line"></span><br><span class="line">public class InstantDemo1 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Instant start = Instant.now();</span><br><span class="line"></span><br><span class="line">        // do something here</span><br><span class="line"></span><br><span class="line">        Instant end = Instant.now();</span><br><span class="line"></span><br><span class="line">        System.out.println(Duration.between(start, end).toMillis());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.time.Duration;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.Instant;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstantDemo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Instant start = Instant.now();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// do something here</span></span><br><span class="line"></span><br><span class="line">        Instant end = Instant.now();</span><br><span class="line"></span><br><span class="line">        System.out.println(Duration.between(start, end).toMillis());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>如上面代码所示，<code>Duration</code>类用于返回两个<code>Instant</code>之间时间数量的差异。</p>
 <hr>
@@ -181,7 +181,7 @@
 </tr>
 </tbody></table>
 <p><code>LocalDate</code>提供了各种创建日期的方法。 例如，要创建代表今天日期的<code>LocalDate</code>，使用静态<code>now</code>方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br></pre></td></tr></table></figure>
 
 <p>要创建代表特定年，月和日的<code>LocalDate</code>，使用<code>of</code>方法，该方法也是静态的。 例如，以下代码创建了一个代表2018年3月7日的<code>LocalDate</code>实例。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalDate date = LocalDate.of(2018, 3, 7);</span><br></pre></td></tr></table></figure>
