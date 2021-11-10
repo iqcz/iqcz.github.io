@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java 8 Lambda 表达式 | 当代十八线浪漫主义码农诗人</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Lambda 是啥玩意">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 8 Lambda 表达式">
+<meta property="og:url" content="http://example.com/2021/11/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
+<meta property="og:description" content="Lambda 是啥玩意">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-10T10:43:03.072Z">
+<meta property="article:modified_time" content="2021-11-10T10:47:57.913Z">
+<meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">当代十八线浪漫主义码农诗人</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java-8-Lambda-表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/11/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time datetime="2021-11-10T10:43:03.072Z" itemprop="datePublished">2021-11-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java 8 Lambda 表达式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Lambda-是啥玩意"><a href="#Lambda-是啥玩意" class="headerlink" title="Lambda 是啥玩意"></a>Lambda 是啥玩意</h3><span id="more"></span>
+
+<p>简单来说，Lambda 就是一个匿名的方法，就这样，没啥特别的。它采用一种非常简洁的方式来定义方法。当你想传递可复用的方法片段时，匿名方法非常有用。例如，将一个方法传递给另外一个方法。</p>
+<blockquote>
+<p>Tips<br>其实很多主流语言早已支持 lambda 表达式，例如，Scala，C#，Objective-C，Ruby，C++(11), Python等等。所以也不是啥新玩意儿。</p>
+</blockquote>
+<h3 id="匿名方法-VS-匿名类"><a href="#匿名方法-VS-匿名类" class="headerlink" title="匿名方法 VS 匿名类"></a>匿名方法 VS 匿名类</h3><p>需要谨记一点，<strong>在 Java 里，匿名方法和匿名类并不是相同的</strong>。匿名类仍然需要实例化对象，匿名类虽然没有明确的名字，但它只有是一个对象时才能够使用。<br>而匿名方法并不需要给它分配实例，方法与作用的数据分离，而对象与它所作用的数据密切相关。</p>
+<h3 id="Java-中的-Lambda-表达式"><a href="#Java-中的-Lambda-表达式" class="headerlink" title="Java 中的 Lambda 表达式"></a>Java 中的 Lambda 表达式</h3><p>在 Java 8之前，一个实现了只有一个抽象方法的接口的匿名类看起来更像Lambda 表达式。下面的代码中，<code>anonymousClass</code>方法调用<code>waitFor</code>方法，参数是一个实现接口的<code>Condition</code>类，实现的功能为，当满足某些条件，Server 就会关闭。<br>下面的代码是典型的匿名类的使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">anonymousClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Server server = <span class="keyword">new</span> HttpServer();</span><br><span class="line">    waitFor(<span class="keyword">new</span> Condition() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Boolean <span class="title">isSatisfied</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> !server.isRunning();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>下面的代码用 Lambda 表达式实现相同的功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">closure</span><span class="params">()</span> </span>&#123; </span><br><span class="line">     Server server = <span class="keyword">new</span> HttpServer();</span><br><span class="line">     waitFor(() -&gt; !server.isRunning()); </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>其实，上面的<code>waitFor</code>方法，更接近于下面的代码的描述：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WaitFor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">waitFor</span><span class="params">(Condition condition)</span> <span class="keyword">throws</span>   </span></span><br><span class="line"><span class="function">    InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!condition.isSatisfied())</span><br><span class="line">            Thread.sleep(<span class="number">250</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="一些理论上的区别"><a href="#一些理论上的区别" class="headerlink" title="一些理论上的区别"></a>一些理论上的区别</h3><p>实际上，上面的两种方法的实现都是闭包，后者的实现就是Lambda 表示式。这就意味着两者都需要持有运行时的环境。在 Java 8 之前，这就需要把匿名类所需要的一切复制给它。在上面的例子中，就需要把 <code>server</code> 属性复制给匿名类。</p>
+<p>因为是复制，变量必须声明为 final 类型，以保证在获取和使用时不会被改变。Java 使用了优雅的方式保证了变量不会被更新，所以我们不用显式地把变量加上 final 修饰。</p>
+<p>Lambda 表达式则不需要拷贝变量到它的运行环境中，从而 Lambda 表达式被当做是一个真正的方法来对待，而不是一个类的实例。</p>
+<p>Lambda 表达式不需要每次都要被实例化，对于 Java 来说，带来巨大的好处。不像实例化匿名类，对内存的影响可以降到最小。</p>
+<p>总体来说，匿名方法和匿名类存在以下区别：</p>
+<ul>
+<li>类必须实例化，而方法不必；</li>
+<li>当一个类被新建时，需要给对象分配内存；</li>
+<li>方法只需要分配一次内存，它被存储在堆的永久区内；</li>
+<li>对象作用于它自己的数据，而方法不会；</li>
+<li>静态类里的方法类似于匿名方法的功能。</li>
+</ul>
+<h3 id="一些具体的区别"><a href="#一些具体的区别" class="headerlink" title="一些具体的区别"></a>一些具体的区别</h3><p>匿名方法和匿名类有一些具体的区别，主要包括获取语义和覆盖变量。</p>
+<h4 id="获取语义"><a href="#获取语义" class="headerlink" title="获取语义"></a>获取语义</h4><p>this 关键字是其中的一个语义上的区别。在匿名类中，this 指的是匿名类的实例，例如有了内部类为<code> Foo$InnerClass</code>，当你引用内部类闭包的作用域时，像<code>Foo.this.x</code>的代码看起来就有些奇怪。<br>在 Lambda 表达式中，this 指的就是闭包作用域，事实上，Lambda 表达式就是一个作用域，这就意味着你不需要从超类那里继承任何名字，或是引入作用域的层级。你可以在作用域里直接访问属性，方法和局部变量。<br>例如，下面的代码中，Lambda 表达式可以直接访问<code>firstName</code>变量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String firstName = <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">example</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Function&lt;String, String&gt; addSurname = surname -&gt; &#123;</span><br><span class="line">            <span class="comment">// equivalent to this.firstName</span></span><br><span class="line">            <span class="keyword">return</span> firstName + <span class="string">&quot; &quot;</span> + surname;  <span class="comment">// or even,   </span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的<code>firstName</code>就是<code>this.firstName</code>的简写。<br>但是在匿名类中，你必须显式地调用<code>firstName</code>，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String firstName = <span class="string">&quot;Jerry&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">anotherExample</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Function&lt;String, String&gt; addSurname = <span class="keyword">new</span> Function&lt;String,  </span><br><span class="line">        String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(String surname)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> Example.<span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + surname;   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="覆盖变量"><a href="#覆盖变量" class="headerlink" title="覆盖变量"></a>覆盖变量</h4><p>在 Lambda 表达式中，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShadowingExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String firstName = <span class="string">&quot; Tim&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shadowingExample</span><span class="params">(String firstName)</span> </span>&#123;</span><br><span class="line">        Function&lt;String, String&gt; addSurname = surname -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + surname;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为 this 在Lambda 表达式中，它指向的是一个封闭的作用域，所以<code>this.firstName</code>对应的值是“Tim”，而不是跟它同名的参数的值。如果去掉this，那么引用的则是方法的参数。</p>
+<p>在上面的例子中，如果用匿名类来实现的话，<code>firstName</code>指的就是方法的参数；如果想访问最外面的<code>firstName</code>，则使用<code>Example.this.firstName</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShadowingExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String firstName = <span class="string">&quot;King&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">anotherShadowingExample</span><span class="params">(String firstName)</span> </span>&#123;</span><br><span class="line">        Function&lt;String, String&gt; addSurname = <span class="keyword">new</span> Function&lt;String,  </span><br><span class="line">        String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(String surname)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> firstName + <span class="string">&quot; &quot;</span> + surname;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Lambda-表达式基本语法"><a href="#Lambda-表达式基本语法" class="headerlink" title="Lambda 表达式基本语法"></a>Lambda 表达式基本语法</h3><p>Lambda 表达式基本上就是匿名函数块。它更像是内部类的实例。例如，我们想对一个数组进行排序，我们可以使用<code>Arrays.sort</code>方法，它的参数是<code>Comparator</code>接口，类似于下面的代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(numbers, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer first, Integer second)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> first.compareTo(second);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>参数里的<code>Comparator</code>实例就是一个抽象片段，本身没有别的。在这里只有在 <code>sort</code> 方法中被使用。<br>如果我们用新的语法来替换，用 Lambda 表达式的方式来实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(numbers, (first, second) -&gt; first.compareTo(second));</span><br></pre></td></tr></table></figure>
+<p>这种方式更加简洁，实际上，Java 把它当做<code>Comparator</code>类的实例来对待。如果我们把 <code>sort </code>的第二个参数从 Lambda 表达式中抽取出来，它的类型为<code>Comparator&lt;Integer&gt;</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Comparator&lt;Integer&gt; ascending = (first, second) -&gt; first.compareTo(second);</span><br><span class="line">Arrays.sort(numbers, ascending);</span><br></pre></td></tr></table></figure>
+<h4 id="语法分解"><a href="#语法分解" class="headerlink" title="语法分解"></a>语法分解</h4><p>你可以把单一的抽象方法转换成 Lambda 表达式。<br>举例，如果我们有一个接口名为<code>Example</code>，里面只有一个抽象方法<code>apply</code>，该抽象方法返回某一类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Example</span> </span>&#123;</span><br><span class="line">     <span class="function">R <span class="title">apply</span><span class="params">(A args)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以匿名实现此接口里的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Example() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> R <span class="title">apply</span><span class="params">(A args)</span> </span>&#123;</span><br><span class="line">        body</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>转换成 Lambda 表达式的话，我们去掉实例和声明，去掉方法的细节，只保留方法的参数列表和方法体。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(args) &#123;</span><br><span class="line">    body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们引入新的符号（-&gt;）来表示 Lambda 表达式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(args) -&gt; &#123;</span><br><span class="line">    body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>拿之前排序的方法为例，首先我们用匿名类来实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(numbers, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer first, Integer second)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> first.compareTo(second);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>下一步，去掉实例和方法签名：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(numbers, (Integer first, Integer second) &#123;</span><br><span class="line">    <span class="keyword">return</span> first.compareTo(second);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>引用 Lambda 表达式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(numbers, (Integer first, Integer second) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> first.compareTo(second);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>完成！但有些地方可以进一步优化。你可以去掉参数的类型，编译器已经足够聪明知道参数的类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(numbers, (first, second) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> first.compareTo(second);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果是一个简单的表达式的话，例如只有一行代码，你可以去掉方法体的大括号，如果有返回值的话，return 关键字也可以去掉。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(numbers, (first, second) -&gt; first.compareTo(second));</span><br></pre></td></tr></table></figure>
+<p>如果Lambda 只有一个参数的话，参数外面的小括号也可以去掉。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x) -&gt; x + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>去掉小括号后，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x -&gt; x + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>下一步我们做下总结，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">int</span> x, <span class="keyword">int</span> y) -&gt; &#123; <span class="keyword">return</span> x + y; &#125;</span><br><span class="line">(x, y) -&gt; &#123; <span class="keyword">return</span> x + y; &#125;</span><br><span class="line">(x, y) -&gt; x + y; x -&gt; x * <span class="number">2</span></span><br><span class="line">() -&gt; System.out.println(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">System.out::println;</span><br></pre></td></tr></table></figure>
+<p>第一个方式是完整的 Lambda 的声明和使用的方式，不过有些冗余，其实，参数的类型可以省略；<br>第二个方式是去掉参数类型的 Lambda 表达式；<br>第三个方式是，如果你的方法体只有一行语句，你可以直接省略掉大括号和 return 关键字；<br>第四个方式是没有参数的 Lambda 表达式；<br>第五个方式是Lambda 表达式的变种：是Lambda 表达式的一种简写，称为方法引用。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out::println;</span><br></pre></td></tr></table></figure>
+<p>实际上它是下面Lambda 表达式的一种简写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(value -&gt; System.out.prinltn(value)</span><br></pre></td></tr></table></figure>
+<h3 id="深入-Lambda表达式"><a href="#深入-Lambda表达式" class="headerlink" title="深入 Lambda表达式"></a>深入 Lambda表达式</h3><h4 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h4><p>Java 把 Lambda表达式当作是一个接口类型的实例。它把这种形式被称之为函数式接口。一个函数式接口就是一个只有单一方法的接口，Java把这种方法称之为“函数式方法”，但更常用的名字为单一抽象方法（single abstract method” 或 SAM）。例如JDK中存在的接口例如<code>Runnable</code>和<code>Callable</code>。</p>
+<h5 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h5><p>Oracle 引入了一个新的注解为<code>@FunctionalInterface</code>， 用来标识一个接口为函数式接口。它基本上是用来传达这一用途，除此而外，编辑器还会做一些额外的检查。<br>比如，下面的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FunctionalInterfaceExample</span> </span>&#123;</span><br><span class="line">    <span class="comment">// compiles ok</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果加上<code>@FunctionalInterface</code>注解，则会编译错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span> <span class="comment">// &lt;- error here</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FunctionalInterfaceExample</span> </span>&#123;</span><br><span class="line">      <span class="comment">// doesn&#x27;t compile</span></span><br><span class="line">&#125;</span><br><span class="line">```Java</span><br><span class="line">编译器就会报错，错误的详细信息为“Invalid <span class="string">&#x27;@FunctionalInterface&#x27;</span> annotation; FunctionalInterfaceExample is not a functional <span class="class"><span class="keyword">interface</span>”。意思是没有定义一个单一的抽象方法。</span></span><br><span class="line"><span class="class">而如果我们定义了两个抽象方法会如何？</span></span><br><span class="line"><span class="class">```<span class="title">Java</span></span></span><br><span class="line"><span class="class">@<span class="title">FunctionalInterface</span></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">interface</span> <span class="title">FunctionalInterfaceExample</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">illegal</span><span class="params">()</span></span>; <span class="comment">// &lt;- error here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译器再次报错，提示为”multiple, non-overriding abstract methods were found”。所以，一旦使用了此注解，则在接口里只能定义一个抽象方法。</p>
+<p>而现在有这样一种情况，如歌一个接口继承了另一个接口，会怎么办？我们创建一个新的函数式接口为A，定义了另一个接口B，B继承A，则B仍然是一个函数式接口，它继承了A的<code>apply</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+<p>如果你想看起来更加清晰，可以复写父类的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以用下面的代码来测试一下上面的两个接口是否为函数式接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">apply</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">   A a = () -&gt; System.out.println(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">   B b = () -&gt; System.out.println(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">   a.apply(); <span class="comment">// 打印：A</span></span><br><span class="line">   b.apply(); <span class="comment">// 打印：B</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果B接口继承了A接口，那么在B接口中就不能定义新的方法了，否则编译器会报错。</p>
+<p>除了这些，在Java 8 中接口有了一些新的改进：</p>
+<ul>
+<li>可以添加默认方法；</li>
+<li>可以包含静态接口方法；</li>
+<li>在<code>java.util.function</code>包中增加了一些新的接口，例如，<code>Function </code> 和 <code>Predicate</code>。</li>
+</ul>
+<h4 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h4><p>简单来说，方法引用就是 Lambda 表达式的一种简写。当你创建一个 Lambda 表达式时，你创建了一个匿名方法并提供方法体，但你使用方法引用时，你只需要提供已经存在的方法的名字，它本身已经包含方法体。<br>它的基本语法如下；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class::method</span><br></pre></td></tr></table></figure>
+<p>或一个更加简洁明了的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String::valueOf</span><br></pre></td></tr></table></figure>
+<p>“::”符号前面表示的是目标引用，后面表示方法的名字。所以，在上面的例子，String 类作为目标类，用来寻找它的方法<code>valueOf</code>，我们指的就是 String 类上的静态方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(Object obj)</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>“::”称之为定界符，当我们使用它的时候，只是用来引用要使用的方法，而不是调用方法，所以不能在方法后面加()。<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String::valueOf(); <span class="comment">// error</span></span><br></pre></td></tr></table></figure><br>你不能直接调用方法引用，只是用来替代 Lambda 表达式，所以，哪里使用 Lambda 表达式了，哪里就可以使用方法引用了。<br>所以，下面的代码并不能运行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">    String::valueOf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是因为该方法引用不能转化为Lambda 表达式，因为编译器没有上下文来推断要创建哪种类型的Lambda。<br>我们知道这个引用其实是等同于下面的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x) -&gt; String.valueOf(x)</span><br></pre></td></tr></table></figure>
+<p>但编译器还不知道。虽然它可以知道一些事情。它知道，作为一个Lambda，返回值应该是字符串类型，因为valueOf方法的返回值为字符串类型。但它不知道作为论据需要提供什么信息。我们需要给它一点帮助，给它更多的上下文信息。<br>下面我们创建一个函数式接口<code>Conversion</code>， </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Conversion</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">convert</span><span class="params">(Integer number)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来我们需要创建一个场景去使用这个接口作为一个 Lambda，我们定义了下面的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">convert</span><span class="params">(Integer number, Conversion function)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> function.convert(number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实，我们已经给编译器提供了足够多的信息，可以把一个方法引用转换成一个等同的 Lambda。当我们调用<code>convert</code>方法时，我们可以把如下代码传递给 Lambda。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert(<span class="number">100</span>, (number) -&gt; String.valueOf(number));</span><br></pre></td></tr></table></figure>
+<p>我们可以用把上面的 Lambda 替换为方法引用，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert(<span class="number">100</span>, String::valueOf);</span><br></pre></td></tr></table></figure>
+<p>另一种方式是我们告诉编译器，把引用分配给一个类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Conversion b = (number) -&gt; String.valueOf(number);</span><br></pre></td></tr></table></figure>
+<p>用方法引用来表示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Conversion b = String::valueOf</span><br></pre></td></tr></table></figure>
+<h4 id="方法引用的种类"><a href="#方法引用的种类" class="headerlink" title="方法引用的种类"></a>方法引用的种类</h4><p>在 Java 中，有四种方法引用的类型：</p>
+<ul>
+<li>构造方法引用；</li>
+<li>静态方法引用：</li>
+<li>两种实例方法引用。</li>
+</ul>
+<p>最后两个有点混乱。第一种是特定对象的方法引用，第二个是任意对象的方法引用，而是特定类型的方法引用。区别在于你想如何使用该方法，如果你事先并不知道有没有实例。</p>
+<h4 id="构造方法引用"><a href="#构造方法引用" class="headerlink" title="构造方法引用"></a>构造方法引用</h4><p>构造方法的基本引用如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String::<span class="keyword">new</span></span><br></pre></td></tr></table></figure>
+<p>它会创建一个 Lambda 表达式，然后调用String 无参的构造方法。<br>它实际上等同于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">() -&gt; <span class="keyword">new</span> String()</span><br></pre></td></tr></table></figure>
+<p>需要注意的是构造方法引用没有括号，它只是引用，并不是调用，上面的例子只是引用了 String类的构造方法，并没有真正去实例化一个字符串对象。<br>接下来我们看一个实际应用构造方法引用的例子。<br>看先的例子，循环十遍为 list 增加对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">usage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Object&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        list.add(<span class="keyword">new</span> Object());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我们想复用实例化的功能，我们可以抽取出一个新的方法<code>initialise</code>用<code>factory</code>创建对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">usage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Object&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    initialise(list, ...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initialise</span><span class="params">(List&lt;Object&gt; list, Factory&lt;Object&gt; factory)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        list.add(factory.create());</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p><code>Factory</code>是一个函数式接口，包含一个<code>create</code>方法，此方法返回 Object 对象，我们可以用 Lambda 的方式向 list 中添加对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">usage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Object&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    initialise(list, () -&gt; <span class="keyword">new</span> Object());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者我们用构造方法引用的方式来替换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">usage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Object&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    initialise(list, Object::<span class="keyword">new</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的方法其实还有待改进，上面只是创建 Object 类型的对象，我们可以增加泛型，实现可以创建更多类型的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">usage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    initialise(list, String::<span class="keyword">new</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">initialise</span><span class="params">(List&lt;T&gt; list, Factory&lt;T&gt; factory)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        list.add(factory.create());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到现在为知，我们演示的都是无参的构造方法的引用，如果是带有参数的构造方法的引用该如何处理呢？<br>当有多个构造函数时，使用相同的语法，但编译器计算出哪个构造函数是最佳匹配。它基于目标类型和推断功能接口，它可以用来创建该类型。<br>例如，我们有个 Person 类，它有一个多个参数的构造方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String forename, String surname, LocalDate    </span></span></span><br><span class="line"><span class="params"><span class="function">    birthday, Sex gender, String emailAddress, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>回到上面的例子，我们可以如下使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">initialise(people, () -&gt; <span class="keyword">new</span> Person(forename, surname, birthday,</span><br><span class="line">                                    gender, email, age));</span><br></pre></td></tr></table></figure>
+<p>但是如果想使用这个构造方法引用，则需要 Lambda 表达式提供如下参数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">initialise(people, () -&gt; <span class="keyword">new</span> Person(forename, surname, birthday,</span><br><span class="line">                                    gender, email, age));</span><br></pre></td></tr></table></figure>
+
+<h4 id="特定对象的方法引用"><a href="#特定对象的方法引用" class="headerlink" title="特定对象的方法引用"></a>特定对象的方法引用</h4><p>下面是特定对象的方法引用的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x::toString</span><br></pre></td></tr></table></figure>
+<p><code>x</code>就是我们想要得到的对象。它等同于下面的Lambda 表达式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">() -&gt; x.toString()</span><br></pre></td></tr></table></figure>
+<p>这种方法引用可以为我们提供便利的方式在不同的函数式接口类型中进行切换。看例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Callable&lt;String&gt; c = () -&gt; <span class="string">&quot;Hello&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><code>Callable</code>的方法为<code>call</code>，当被调用时返回“Hello”。<br>如果我们有另外一个函数式接口<code>Factory</code>，我们可以使用方法引用的方式来转变<code>Callable</code>这个函数式接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Factory&lt;String&gt; f = c::call;</span><br></pre></td></tr></table></figure>
+<p>我们可以重新创建一个 Lambda表达式，但是这个技巧是重用预定义的Lambda的一个有用的方式。 将它们分配给变量并重用它们以避免重复。<br>我们有下面一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">example</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String x = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    function(x::toString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子中方法引用使用了闭包。他创建了一个 Lambda用来调用<code>x</code>对象上的<code>toString</code>方法。<br>上面<code>function</code>方法的签名和实现如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">function</span><span class="params">(Supplier&lt;String&gt; supplier)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> supplier.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数式接口<code>Supplier</code>的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Supplier</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function">T <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当使用此方法时，它通过<code>get</code>方法返回一个字符串，而且这是唯一的在我们的结构中获取字符串的方式。它等同于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">example</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  String x = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  function(() -&gt; x.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，这里的 Lambda 表达式没有参数。这表明<code>x</code>变量在Lambda的局部作用域里是不可用的，如果可用必须要放在它的作用域之外。我们必须要掩盖变量<code>x</code>。<br>如果用匿名类来实现的话，应该是下面的样子，这些需要主意，<code>x</code>变量是如何传递的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">example</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String x = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    function(<span class="keyword">new</span> Supplier&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> x.toString(); <span class="comment">// &lt;- closes over &#x27;x&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="任意对象的实例方法引用（实例随后提供）"><a href="#任意对象的实例方法引用（实例随后提供）" class="headerlink" title="任意对象的实例方法引用（实例随后提供）"></a>任意对象的实例方法引用（实例随后提供）</h4><p>最后一种类型的实例方法引用的格式是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object::toString</span><br></pre></td></tr></table></figure>
+<p>尽管在“::”左边指向的是一个类（有点类似于静态方法引用），实际上它是指向一个对象，<code>toString</code>方法是<code>Object</code>类上的实例方法，不是静态方法。您可能不使用常规实例方法语法的原因是，还没有引用的实例。<br>在以前，当我们调用<code>x::toString</code>时，我们是知道<code>x</code>的类型，但是有些情况我们是不知道的，但你仍然可以传递一个方法引用，但是在后面使用此语法时需要提供对应的类型。<br>例如，下面的表达式等同于<code>x</code>没有限制的类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x) -&gt; x.toString()</span><br></pre></td></tr></table></figure>
+<p>有两种不同的实例方法的引用基本是学术上的。有时候，你需要传递一些东西，其他时候，Lambda 的用法会为你提供。<br>这个例子类似于一个常规的方法引用；它这次调用String 对象的<code>toString</code>方法，该字符串提供给使用 Lambda 的函数，而不是从外部作用域传递的函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambdaExample</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    function(<span class="string">&quot;value&quot;</span>, String::toString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个<code>String</code>看起来像是引用一个类，其实是一个实例。是不是有些迷惑，为了能清晰一些，我们需要看一个使用 Lambda 表达式的方法，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">function</span><span class="params">(String value, Function&lt;String, String&gt; function)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> function.apply(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，这个 String 实例直接传递给了方法，它看起来像一个完全合格的Lambda。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambdaExample</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    function(<span class="string">&quot;value&quot;</span>, x -&gt; x.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码可以简写成<code>String::toString</code>， 它是在说在运行时给我提供对象实例。<br>如果你想用匿名类展开加以理解，它是这个样子的。参数<code>x</code>是可用的并没有被遮蔽，所以它更像是Lambda 表达式而不是闭包。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lambdaExample</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    function(<span class="string">&quot;value&quot;</span>, <span class="keyword">new</span> Function&lt;String, String&gt;() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="comment">// takes the argument as a parameter, doesn&#x27;t need to close </span></span><br><span class="line">      <span class="function">over it</span></span><br><span class="line"><span class="function">      <span class="keyword">public</span> String <span class="title">apply</span><span class="params">(String x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x.toString();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法引用的总结"><a href="#方法引用的总结" class="headerlink" title="方法引用的总结"></a>方法引用的总结</h4><p>Oracle描述了四种类型的<a target="_blank" rel="noopener" href="http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html">方法引用</a>，如下所示。</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>静态方法引用</td>
+<td><code>ContainingClass::staticMethodName</code></td>
+</tr>
+<tr>
+<td>特定对象的实例方法引用</td>
+<td><code>ContainingObject::instanceMethodName</code></td>
+</tr>
+<tr>
+<td>特定类型的任意对象的实例方法引用</td>
+<td><code>ContainingType::methodName</code></td>
+</tr>
+<tr>
+<td>构造方法引用</td>
+<td><code>ClassName::new</code></td>
+</tr>
+</tbody></table>
+<p>下面是方法引用的语法和具体的例子。</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>语法</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>静态方法引用</td>
+<td>Class::staticMethodName</td>
+<td><code>String::valueOf</code></td>
+</tr>
+<tr>
+<td>特定对象的实例方法引用</td>
+<td>object::instanceMethodName</td>
+<td><code>x::toString</code></td>
+</tr>
+<tr>
+<td>特定类型的任意对象的实例方法引用</td>
+<td>Class::instanceMethodName</td>
+<td><code>String::toString</code></td>
+</tr>
+<tr>
+<td>构造方法引用</td>
+<td>ClassName::new</td>
+<td><code>String::new</code></td>
+</tr>
+</tbody></table>
+<p>最后，上面的方法引用等同于下面对应的 Lambda 表达式。</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>语法</th>
+<th>Lambda</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>静态方法引用</td>
+<td>Class::staticMethodName</td>
+<td><code>(s) -&gt; String.valueOf(s)</code></td>
+</tr>
+<tr>
+<td>特定对象的实例方法引用</td>
+<td>object::instanceMethodName</td>
+<td><code>() -&gt; &quot;hello&quot;.toString()</code></td>
+</tr>
+<tr>
+<td>特定类型的任意对象的实例方法引用</td>
+<td>Class::instanceMethodName</td>
+<td><code>(s) -&gt; s.toString()</code></td>
+</tr>
+<tr>
+<td>构造方法引用</td>
+<td>ClassName::new</td>
+<td><code>() -&gt; new String()</code></td>
+</tr>
+</tbody></table>
+<p>目前为止，Labmbda 的主要内容已经介绍完毕。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="ckvtefcb4000014u05yobhn2a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/10/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 8 Date-Time API 详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Java 8 Lambda 表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/10/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/">Java 8 Date-Time API 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/%E3%80%8A%E6%98%8E%E6%99%BA%E8%A1%8C%E5%8A%A8%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《明智行动的艺术》读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/">《历代经济变革得失》读后感</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/12/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Redis分布式锁的使用与实现原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 公众号：书香颜 | 微信号: phideonvw<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
