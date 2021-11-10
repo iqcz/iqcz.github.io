@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>10种常见的软件架构模式 | 当代十八线浪漫主义码农诗人</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有没有想过要设计多大的企业规模系统？在主要的软件开发开始之前，我们必须选择一个合适的体系结构，它将为我们提供所需的功能和质量属性。因此，在将它们应用到我们的设计之前，我们应该了解不同的体系结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10种常见的软件架构模式">
+<meta property="og:url" content="http://example.com/2017/09/13/10%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
+<meta property="og:description" content="有没有想过要设计多大的企业规模系统？在主要的软件开发开始之前，我们必须选择一个合适的体系结构，它将为我们提供所需的功能和质量属性。因此，在将它们应用到我们的设计之前，我们应该了解不同的体系结构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/7.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/8.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/9.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/10.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/11.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/12.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/13.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/14.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/15.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/16.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/17.png">
+<meta property="article:published_time" content="2017-09-13T12:13:23.000Z">
+<meta property="article:modified_time" content="2021-11-10T12:19:16.908Z">
+<meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
+<meta property="article:tag" content="架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://r2cex8oik.hn-bkt.clouddn.com/7.png">
+  
+    <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">当代十八线浪漫主义码农诗人</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-10种常见的软件架构模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/13/10%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2017-09-13T12:13:23.000Z" itemprop="datePublished">2017-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      10种常见的软件架构模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有没有想过要设计多大的企业规模系统？在主要的软件开发开始之前，我们必须选择一个合适的体系结构，它将为我们提供所需的功能和质量属性。因此，在将它们应用到我们的设计之前，我们应该了解不同的体系结构。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>原文作者：<a target="_blank" rel="noopener" href="https://medium.com/@vijinimallawaarachchi?source=post_header_lockup">Vijini Mallawaarachchi</a><br>原文地址：<a target="_blank" rel="noopener" href="https://medium.com/towards-data-science/10-common-software-architectural-patterns-in-a-nutshell-a0b47a1e9013">10 Common Software Architectural Patterns in a nutshell</a></p>
+</blockquote>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/7.png"></p>
+<h1 id="什么是架构模式？"><a href="#什么是架构模式？" class="headerlink" title="什么是架构模式？"></a><a href="">什么是架构模式？</a></h1><p>根据维基百科中的定义：</p>
+<blockquote>
+<p> 架构模式是一个通用的、可重用的解决方案，用于在给定上下文中的软件体系结构中经常出现的问题。架构模式与软件设计模式类似，但具有更广泛的范围。</p>
+</blockquote>
+<p>在本文中，将简要地解释以下10种常见的体系架构模式，以及它们的用法、优缺点。</p>
+<ol>
+<li>分层模式</li>
+<li>客户端-服务器模式</li>
+<li>主从设备模式</li>
+<li>管道-过滤器模式</li>
+<li>代理模式</li>
+<li>点对点模式</li>
+<li>事件总线模式</li>
+<li>模型-视图-控制器模式</li>
+<li>黑板模式</li>
+<li>解释器模式</li>
+</ol>
+<hr>
+<h3 id="一-分层模式"><a href="#一-分层模式" class="headerlink" title="一. 分层模式"></a><a href="">一. 分层模式</a></h3><p>这种模式也称为多层体系架构模式。它可以用来构造可以分解为子任务组的程序，每个子任务都处于一个特定的抽象级别。每个层都为下一个提供更高层次服务。</p>
+<p>一般信息系统中最常见的是如下所列的4层。</p>
+<ul>
+<li>表示层(也称为UI层)</li>
+<li>应用层(也称为服务层)</li>
+<li>业务逻辑层(也称为领域层)</li>
+<li>数据访问层(也称为持久化层)</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li>一般的桌面应用程序</li>
+<li>电子商务Web应用程序</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/8.png" alt="Layered pattern"></p>
+<h3 id="二-客户端-服务器模式"><a href="#二-客户端-服务器模式" class="headerlink" title="二. 客户端-服务器模式"></a><a href="">二. 客户端-服务器模式</a></h3><p>这种模式由两部分组成：一个服务器和多个客户端。服务器组件将为多个客户端组件提供服务。客户端从服务器请求服务，服务器为这些客户端提供相关服务。此外，服务器持续侦听客户机请求。</p>
+<p>使用场景：</p>
+<ul>
+<li>电子邮件，文件共享和银行等在线应用程序</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/9.png" alt="Client-server pattern"></p>
+<h3 id="三-主从设备模式"><a href="#三-主从设备模式" class="headerlink" title="三. 主从设备模式"></a><a href="">三. 主从设备模式</a></h3><p>这种模式由两方组成;主设备和从设备。主设备组件在相同的从设备组件中分配工作，并计算最终结果，这些结果是由从设备返回的结果。</p>
+<p>使用场景：</p>
+<ul>
+<li>在数据库复制中，主数据库被认为是权威的来源，并且要与之同步</li>
+<li>在计算机系统中与总线连接的外围设备(主和从驱动器)</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/10.png" alt="Master-slave pattern"></p>
+<h3 id="四-管道-过滤器模式"><a href="#四-管道-过滤器模式" class="headerlink" title="四. 管道-过滤器模式"></a><a href="">四. 管道-过滤器模式</a></h3><p>此模式可用于构造生成和处理数据流的系统。每个处理步骤都封装在一个过滤器组件内。要处理的数据是通过管道传递的。这些管道可以用于缓冲或用于同步。</p>
+<p>使用场景：</p>
+<ul>
+<li>编译器。连续的过滤器执行词法分析、解析、语义分析和代码生成</li>
+<li>生物信息学的工作流</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/11.png" alt="Pipe-filter pattern"></p>
+<h3 id="五-代理模式"><a href="#五-代理模式" class="headerlink" title="五. 代理模式"></a><a href="">五. 代理模式</a></h3><p>此模式用于构造具有解耦组件的分布式系统。这些组件可以通过远程服务调用彼此交互。代理组件负责组件之间的通信协调。</p>
+<p>服务器将其功能(服务和特征)发布给代理。客户端从代理请求服务，然后代理将客户端重定向到其注册中心的适当服务。</p>
+<p>使用场景：</p>
+<ul>
+<li>消息代理软件，如Apache ActiveMQ，Apache Kafka，RabbitMQ和JBoss Messaging</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/12.png" alt="Broker pattern"></p>
+<h3 id="六-点对点模式"><a href="#六-点对点模式" class="headerlink" title="六. 点对点模式"></a><a href="">六. 点对点模式</a></h3><p>在这种模式中，单个组件被称为对等点。对等点可以作为客户端，从其他对等点请求服务，作为服务器，为其他对等点提供服务。对等点可以充当客户端或服务器或两者的角色，并且可以随时间动态地更改其角色。</p>
+<p>使用场景：</p>
+<ul>
+<li>像Gnutella和G2这样的文件共享网络</li>
+<li>多媒体协议，如P2PTV和PDTP</li>
+<li>像Spotify这样的专有多媒体应用程序</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/13.png" alt="Peer-to-peer pattern"></p>
+<h3 id="七-事件总线模式"><a href="#七-事件总线模式" class="headerlink" title="七. 事件总线模式"></a><a href="">七. 事件总线模式</a></h3><p>这种模式主要是处理事件，包括4个主要组件：事件源、事件监听器、通道和事件总线。消息源将消息发布到事件总线上的特定通道上。侦听器订阅特定的通道。侦听器会被通知消息，这些消息被发布到它们之前订阅的一个通道上。</p>
+<p>使用场景：</p>
+<ul>
+<li>安卓开发</li>
+<li>通知服务</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/14.png" alt="Event-bus pattern"></p>
+<h3 id="八-模型-视图-控制器模式"><a href="#八-模型-视图-控制器模式" class="headerlink" title="八. 模型-视图-控制器模式"></a><a href="">八. 模型-视图-控制器模式</a></h3><p>这种模式，也称为MVC模式，把一个交互式应用程序划分为3个部分，</p>
+<ul>
+<li>模型：包含核心功能和数据</li>
+<li>视图：将信息显示给用户(可以定义多个视图)</li>
+<li>控制器：处理用户输入的信息</li>
+</ul>
+<p>这样做是为了将信息的内部表示与信息的呈现方式分离开来，并接受用户的请求。它分离了组件，并允许有效的代码重用。</p>
+<p>使用场景：</p>
+<ul>
+<li>在主要编程语言中互联网应用程序的体系架构</li>
+<li>像Django和Rails这样的Web框架</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/15.png" alt="Model-view-controller pattern"></p>
+<h3 id="九-黑板模式"><a href="#九-黑板模式" class="headerlink" title="九. 黑板模式"></a><a href="">九. 黑板模式</a></h3><p>这种模式对于没有确定解决方案策略的问题是有用的。黑板模式由3个主要组成部分组成。</p>
+<ul>
+<li>黑板——包含来自解决方案空间的对象的结构化全局内存</li>
+<li>知识源——专门的模块和它们自己的表示</li>
+<li>控制组件——选择、配置和执行模块</li>
+</ul>
+<p>所有的组件都可以访问黑板。组件可以生成添加到黑板上的新数据对象。组件在黑板上查找特定类型的数据，并通过与现有知识源的模式匹配来查找这些数据。</p>
+<p>使用场景：</p>
+<ul>
+<li>语音识别</li>
+<li>车辆识别和跟踪</li>
+<li>蛋白质结构识别</li>
+<li>声纳信号的解释</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/16.png" alt="Blackboard pattern"></p>
+<h3 id="十-解释器模式"><a href="#十-解释器模式" class="headerlink" title="十. 解释器模式"></a><a href="">十. 解释器模式</a></h3><p>这个模式用于设计一个解释用专用语言编写的程序的组件。它主要指定如何评估程序的行数，即以特定的语言编写的句子或表达式。其基本思想是为每种语言的符号都有一个分类。</p>
+<p>使用场景：</p>
+<ul>
+<li>数据库查询语言，比如SQL</li>
+<li>用于描述通信协议的语言</li>
+</ul>
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/17.png" alt="Interpreter pattern"></p>
+<hr>
+<h1 id="体系架构模式的比较"><a href="#体系架构模式的比较" class="headerlink" title="体系架构模式的比较"></a><a href="">体系架构模式的比较</a></h1><p>下面给出的表格总结了每种体系架构模式的优缺点。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分层模式</td>
+<td>一个较低的层可以被不同的层所使用。层使标准化更容易，因为我们可以清楚地定义级别。可以在层内进行更改，而不会影响其他层。</td>
+<td>不是普遍适用的。在某些情况下，某些层可能会被跳过。</td>
+</tr>
+<tr>
+<td>客户端-服务器模式</td>
+<td>很好地建立一组服务，用户可以请求他们的服务。</td>
+<td>请求通常在服务器上的单独线程中处理。由于不同的客户端具有不同的表示，进程间通信会导致额外开销。</td>
+</tr>
+<tr>
+<td>主从设备模式</td>
+<td>准确性——将服务的执行委托给不同的从设备，具有不同的实现。</td>
+<td>从设备是孤立的：没有共享的状态。主-从通信中的延迟可能是一个问题，例如在实时系统中。这种模式只能应用于可以分解的问题。</td>
+</tr>
+<tr>
+<td>管道-过滤器模式</td>
+<td>展示并发处理。当输入和输出由流组成时，过滤器在接收数据时开始计算。轻松添加过滤器，系统可以轻松扩展。过滤器可重复使用。 可以通过重新组合一组给定的过滤器来构建不同的管道。</td>
+<td>效率受到最慢的过滤过程的限制。从一个过滤器移动到另一个过滤器时的数据转换开销。</td>
+</tr>
+<tr>
+<td>代理模式</td>
+<td>允许动态更改、添加、删除和重新定位对象，这使开发人员的发布变得透明。</td>
+<td>要求对服务描述进行标准化。</td>
+</tr>
+<tr>
+<td>点对点模式</td>
+<td>支持分散式计算。对任何给定节点的故障处理具有强大的健壮性。在资源和计算能力方面具有很高的可扩展性。</td>
+<td>服务质量没有保证，因为节点是自愿合作的。安全是很难得到保证的。性能取决于节点的数量。</td>
+</tr>
+<tr>
+<td>事件总线模式</td>
+<td>新的发布者、订阅者和连接可以很容易地添加。对高度分布式的应用程序有效。</td>
+<td>可伸缩性可能是一个问题，因为所有消息都是通过同一事件总线进行的。</td>
+</tr>
+<tr>
+<td>模型-视图-控制器模式</td>
+<td>可以轻松地拥有同一个模型的多个视图，这些视图可以在运行时连接和断开。</td>
+<td>增加复杂性。可能导致许多不必要的用户操作更新。</td>
+</tr>
+<tr>
+<td>黑板模式</td>
+<td>很容易添加新的应用程序。扩展数据空间的结构很简单。</td>
+<td>修改数据空间的结构非常困难，因为所有应用程序都受到了影响。可能需要同步和访问控制。</td>
+</tr>
+<tr>
+<td>解释器模式</td>
+<td>高度动态的行为是可行的。对终端用户编程性提供好处。提高灵活性，因为替换一个解释程序很容易。</td>
+<td>由于解释语言通常比编译后的语言慢，因此性能可能是一个问题。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Tips<br>“本译文仅供个人研习之用，谢绝任何转载及用于任何商业用途。”</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/09/13/10%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/" data-id="ckvthos5l00000wu0ga32ba7p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/16/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%81%9C%E6%AD%A2%E9%98%85%E8%AF%BB%E6%96%B0%E9%97%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          为什么你应该停止阅读新闻?
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/19/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 8 Date-Time API 详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%85%E8%AF%BB/" rel="tag">阅读</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/16/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%81%9C%E6%AD%A2%E9%98%85%E8%AF%BB%E6%96%B0%E9%97%BB/">为什么你应该停止阅读新闻?</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/13/10%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/">10种常见的软件架构模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/19/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/">Java 8 Date-Time API 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Java 8 Lambda 表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/%E3%80%8A%E6%98%8E%E6%99%BA%E8%A1%8C%E5%8A%A8%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《明智行动的艺术》读书笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 公众号：书香颜 | 微信号: phideonvw<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
