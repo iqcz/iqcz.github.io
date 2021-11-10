@@ -7,15 +7,15 @@
   
   <title>Java 8 Date-Time API 详解 | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从Java版本1.0开始就支持日期和时间，主要通过java.util.Date类。 但是，Date类设计不佳。 例如，Date中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时java.util.Calendar被引入来接管Date中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替">
+  <meta name="description" content="从Java版本1.0开始就支持日期和时间，主要通过java.util.Date类。 但是，Date类设计不佳。 例如，Date中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时java.util.Calendar被引入来接管Date中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替代品">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 8 Date-Time API 详解">
 <meta property="og:url" content="http://example.com/2021/11/10/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="从Java版本1.0开始就支持日期和时间，主要通过java.util.Date类。 但是，Date类设计不佳。 例如，Date中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时java.util.Calendar被引入来接管Date中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替">
+<meta property="og:description" content="从Java版本1.0开始就支持日期和时间，主要通过java.util.Date类。 但是，Date类设计不佳。 例如，Date中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时java.util.Calendar被引入来接管Date中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替代品">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-10T06:41:15.000Z">
-<meta property="article:modified_time" content="2021-11-10T06:58:50.699Z">
+<meta property="article:modified_time" content="2021-11-10T07:04:08.266Z">
 <meta property="article:author" content="Yannnn">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -93,9 +93,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
+        <p>从Java版本1.0开始就支持日期和时间，主要通过<code>java.util.Date</code>类。 但是，<code>Date</code>类设计不佳。 例如，<code>Date</code>中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时<code>java.util.Calendar</code>被引入来接管<code>Date</code>中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替代品，例如Joda Time（http://<a target="_blank" rel="noopener" href="http://joda.org/">joda.org</a>）。 JDK 1.8中的新日期和时间API解决了旧API中的许多问题，并且与Joda Time API类似。</p>
+<span id="more"></span>
 
-<p>从Java版本1.0开始就支持日期和时间，主要通过<code>java.util.Date</code>类。 但是，<code>Date</code>类设计不佳。 例如，<code>Date</code>中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时<code>java.util.Calendar</code>被引入来接管<code>Date</code>中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替代品，例如Joda Time（http://<a target="_blank" rel="noopener" href="http://joda.org/">joda.org</a>）。 JDK 1.8中的新日期和时间API解决了旧API中的许多问题，并且与Joda Time API类似。</p>
 <p>这里介绍JDK 1.8中的日期 - 时间的API。</p>
 <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>新的日期和时间API使得使用日期和时间非常容易。<code>java.time</code>包中包含API中的核心类。 另外，还有其他四个包，其成员使用较少：<code>java.time.chrono</code>，<code>java.time.format</code>，<code>java.time.temporal</code>和<code>java.time.zone</code>。</p>
 <p>在<code>java.time</code>包中，<code>Instant</code>类表示时间线上的一个点，通常用于对时间进行操作。 <code>LocalDate</code>类为没有时间和时区部分的日期建模，例如，用于表示生日。</p>
