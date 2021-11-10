@@ -5,18 +5,26 @@
   
 
   
-  <title>当代十八线浪漫主义码农诗人</title>
+  <title>GSON速学必会 | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java | Code | Book | Algorithm">
-<meta property="og:type" content="website">
-<meta property="og:title" content="当代十八线浪漫主义码农诗人">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="一. GSON 简介GSON是一个Java语言编写的用于处理JSON数据格式的开源应用程序编程接口项目。它将Java对象转换为JSON表示。还可以用于将JSON字符串转换为等效的Java对象。  gson包包含了JSON数据处理的所有常见类和接口。gson内部的子包reflect, annotation, 和 stream。reflect包包含处理Java泛型类型信息的类和接口。annotatio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GSON速学必会">
+<meta property="og:url" content="http://example.com/2017/02/10/GSON%E9%80%9F%E5%AD%A6%E5%BF%85%E4%BC%9A/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="Java | Code | Book | Algorithm">
+<meta property="og:description" content="一. GSON 简介GSON是一个Java语言编写的用于处理JSON数据格式的开源应用程序编程接口项目。它将Java对象转换为JSON表示。还可以用于将JSON字符串转换为等效的Java对象。  gson包包含了JSON数据处理的所有常见类和接口。gson内部的子包reflect, annotation, 和 stream。reflect包包含处理Java泛型类型信息的类和接口。annotatio">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/1.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/2.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/3.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/4.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/5.png">
+<meta property="article:published_time" content="2017-02-10T10:53:59.000Z">
+<meta property="article:modified_time" content="2021-11-10T11:01:36.714Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
-<meta property="article:tag" content="Java, Code, 程序员, 分布式, 算法">
+<meta property="article:tag" content="Java, JSON">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://r2cex8oik.hn-bkt.clouddn.com/1.png">
   
     <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
   
@@ -65,146 +73,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Java-8-Date-Time-API-详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/11/10/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/" class="article-date">
-  <time datetime="2021-11-10T06:41:15.000Z" itemprop="datePublished">2021-11-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/10/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/">Java 8 Date-Time API 详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从Java版本1.0开始就支持日期和时间，主要通过<code>java.util.Date</code>类。 但是，<code>Date</code>类设计不佳。 例如，<code>Date</code>中的月份从1开始，但从日期却从0开始。在JDK 1.1中使用它的许多方法已经废弃，同时<code>java.util.Calendar</code>被引入来接管<code>Date</code>中的一些功能。 这两个是处理日期和时间的主要类，直到JDK 1.7，尽管他们被认为是不足够并且不容易处理，导致许多人诉诸第三方替代品，例如Joda Time（http://<a target="_blank" rel="noopener" href="http://joda.org/">joda.org</a>）。 JDK 1.8中的新日期和时间API解决了旧API中的许多问题，并且与Joda Time API类似。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/11/10/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/11/10/Java-8-Date-Time-API-%E8%AF%A6%E8%A7%A3/" data-id="ckvt5n91e0000gou04zla9g8a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Java-8-Lambda-表达式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
-  <time datetime="2017-04-10T10:43:03.000Z" itemprop="datePublished">2017-04-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Java 8 Lambda 表达式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Lambda-是啥玩意"><a href="#Lambda-是啥玩意" class="headerlink" title="Lambda 是啥玩意"></a>Lambda 是啥玩意</h3>
-        
-          <p class="article-more-link">
-            <a href="/2017/04/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2017/04/10/Java-8-Lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="ckvtefcb4000014u05yobhn2a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-《明智行动的艺术》读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/27/%E3%80%8A%E6%98%8E%E6%99%BA%E8%A1%8C%E5%8A%A8%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time datetime="2017-02-27T09:40:41.000Z" itemprop="datePublished">2017-02-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/%E3%80%8A%E6%98%8E%E6%99%BA%E8%A1%8C%E5%8A%A8%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《明智行动的艺术》读书笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天给大家讲的这本书叫《明智行动的艺术》，成功决策必须避免的52个思维陷阱。不忽悠，这是今年乃至最近几年，读到的为数不多的好书。今天先把前26个思维陷阱给大家概况一下，既能了解其内容，就能为你节省时间。不过，我还是推荐大家认真去读一下。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/27/%E3%80%8A%E6%98%8E%E6%99%BA%E8%A1%8C%E5%8A%A8%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2017/02/27/%E3%80%8A%E6%98%8E%E6%99%BA%E8%A1%8C%E5%8A%A8%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="ckvtc6nx40000cou03za1fd3t" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-GSON速学必会" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-GSON速学必会" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/10/GSON%E9%80%9F%E5%AD%A6%E5%BF%85%E4%BC%9A/" class="article-date">
   <time datetime="2017-02-10T10:53:59.000Z" itemprop="datePublished">2017-02-10</time>
@@ -221,8 +90,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/GSON%E9%80%9F%E5%AD%A6%E5%BF%85%E4%BC%9A/">GSON速学必会</a>
+    <h1 class="article-title" itemprop="name">
+      GSON速学必会
     </h1>
   
 
@@ -559,103 +428,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-《历代经济变革得失》读后感" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/" class="article-date">
-  <time datetime="2017-01-23T23:26:28.000Z" itemprop="datePublished">2017-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2017/02/27/%E3%80%8A%E6%98%8E%E6%99%BA%E8%A1%8C%E5%8A%A8%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          《明智行动的艺术》读书笔记
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/">《历代经济变革得失》读后感</a>
-    </h1>
   
+    <a href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">《历代经济变革得失》读后感</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>前言</p>
-<p>最近读到难得的一本好书，吴晓波老师的《历代经济变革得失》，不枯燥，很生动易懂，只有了解历代的经济变革，才能更好的理解当今的中国经济。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/" data-id="ckvtblsyi000094u04b4m7iz8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-Redis分布式锁的使用与实现原理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/12/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="article-date">
-  <time datetime="2017-01-12T03:24:12.000Z" itemprop="datePublished">2017-01-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/12/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Redis分布式锁的使用与实现原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>模拟一个电商里面下单减库存的场景。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/12/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2017/01/12/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" data-id="ckvt3mzqj0000a4u076ovgan3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
