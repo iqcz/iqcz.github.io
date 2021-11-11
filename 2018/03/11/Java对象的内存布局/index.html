@@ -7,16 +7,16 @@
   
   <title>Java对象的内存布局 | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="内存组成在 HotSpot 虚拟机里， 对象在堆内存中的存储布局可以划分为三个部分：  对象头（ Header）；  实例数据（ Instance Data） ；  对齐填充（ Padding）。">
+  <meta name="description" content="在 HotSpot 虚拟机里， 对象在堆内存中的存储布局可以划分为三个部分：  对象头（ Header）；  实例数据（ Instance Data） ；  对齐填充（ Padding）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java对象的内存布局">
 <meta property="og:url" content="http://example.com/2018/03/11/Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="内存组成在 HotSpot 虚拟机里， 对象在堆内存中的存储布局可以划分为三个部分：  对象头（ Header）；  实例数据（ Instance Data） ；  对齐填充（ Padding）。">
+<meta property="og:description" content="在 HotSpot 虚拟机里， 对象在堆内存中的存储布局可以划分为三个部分：  对象头（ Header）；  实例数据（ Instance Data） ；  对齐填充（ Padding）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/22.png">
 <meta property="article:published_time" content="2018-03-11T02:55:18.000Z">
-<meta property="article:modified_time" content="2021-11-11T04:13:38.857Z">
+<meta property="article:modified_time" content="2021-11-11T04:16:42.251Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -97,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="内存组成"><a href="#内存组成" class="headerlink" title="内存组成"></a>内存组成</h2><p>在 HotSpot 虚拟机里， 对象在堆内存中的存储布局可以划分为三个部分：</p>
+        <p>在 HotSpot 虚拟机里， 对象在堆内存中的存储布局可以划分为三个部分：</p>
 <ul>
 <li><p>对象头（ Header）；</p>
 </li>
@@ -130,7 +130,7 @@
 
 
 <p>默认开启压缩指针，<code>layout</code> 所占内存为: 对象头8byte + 压缩指针4byte + 对齐填充4byte = 16byte;</p>
-<p><code>layout1</code>数组所占内存为：<code>layout</code> 所占内存为: 对象头8byte + 压缩指针4byte + 自身数组标识4byte + 对齐填充0byte = 16byte;</p>
+<p><code>layout1</code>数组所占内存为: 对象头8byte + 压缩指针4byte + 自身数组标识4byte + 对齐填充0byte = 16byte;</p>
 <p><code>layout12</code> 所占内存为：对象头8byte + 压缩指针4byte + int类型变量4byte + byte类型变量1byte + 对齐填充3byte + String类型变量4byte + Object类型变量4bypte + 对齐填充4byte = 32 byte；</p>
 <h2 id="什么是Java对象的指针压缩？"><a href="#什么是Java对象的指针压缩？" class="headerlink" title="什么是Java对象的指针压缩？"></a>什么是Java对象的指针压缩？</h2><ol>
 <li>jdk1.6 update14开始，在64bit操作系统中，JVM支持指针压缩；</li>
