@@ -34,8 +34,19 @@
 <meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/45.png">
 <meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/46.png">
 <meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/47.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/48.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/49.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/50.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/51.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/52.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/53.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/54.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/55.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/56.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/57.png">
+<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/58.png">
 <meta property="article:published_time" content="2019-08-12T01:37:08.000Z">
-<meta property="article:modified_time" content="2021-11-12T03:22:55.918Z">
+<meta property="article:modified_time" content="2021-11-12T03:59:52.727Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -184,7 +195,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from film_actor where film_id = 2;</span><br></pre></td></tr></table></figure>
 
 <p><img src="http://r2cex8oik.hn-bkt.clouddn.com/40.png"></p>
-<p>key_len计算规则如下：<br>字符串，char(n)和varchar(n)，5.0.3以后版本中，n均代表字符数，而不是字节数，如果是utf-8，一个数字<br>或字母占1个字节，一个汉字占3个字节<br>                char(n)：如果存汉字长度就是 3n 字节<br>                varchar(n)：如果存汉字则长度是 3n + 2 字节，加的2字节用来存储字符串长度，因为<br>                varchar是变长字符串<br>数值类型<br>                tinyint：1字节<br>                smallint：2字节<br>                int：4字节<br>                bigint：8字节　　<br>时间类型　<br>                date：3字节<br>                timestamp：4字节<br>                datetime：8字节<br>如果字段允许为 NULL，需要1字节记录是否为 NULL<br>索引最大长度是768字节，当字符串过长时，mysql会做一个类似左前缀索引的处理，将前半部分的字符提取出来做索引。</p>
+<p>key_len计算规则如下：<br>字符串，char(n)和varchar(n)，5.0.3以后版本中，n均代表字符数，而不是字节数，如果是utf-8，一个数字<br>或字母占1个字节，一个汉字占3个字节。<br>                char(n)：如果存汉字长度就是 3n 字节<br>                varchar(n)：如果存汉字则长度是 3n + 2 字节，加的2字节用来存储字符串长度，因为<br>                varchar是变长字符串<br>数值类型<br>                tinyint：1字节<br>                smallint：2字节<br>                int：4字节<br>                bigint：8字节　　<br>时间类型　<br>                date：3字节<br>                timestamp：4字节<br>                datetime：8字节<br>如果字段允许为 NULL，需要1字节记录是否为 NULL<br>索引最大长度是768字节，当字符串过长时，mysql会做一个类似左前缀索引的处理，将前半部分的字符提取出来做索引。</p>
 <h4 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h4><p>这一列显示了在key列记录的索引中，表查找值所用到的列或常量，常见的有：const（常量），字段名（例：film.id）</p>
 <h4 id="row"><a href="#row" class="headerlink" title="row"></a>row</h4><p>这一列是mysql估计要读取并检测的行数，注意这个不是结果集里的行数。</p>
 <h4 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h4><p>这一列展示的是额外信息。常见的重要值如下：<br>1）Using index：使用覆盖索引<br>覆盖索引定义：mysql执行计划explain结果里的key有使用索引，如果select后面查询的字段都可以从这个索引的树中获取，这种情况一般可以说是用到了覆盖索引，extra里一般都有using index；覆盖索引一般针对的是辅助索引，整个查询结果只通过辅助索引就能拿到结果，不需要通过辅助索引树找到主键，再通过主键去主键索引树里获取其它字段值</p>
@@ -221,6 +232,50 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select min(film_id) from film;</span><br></pre></td></tr></table></figure>
 
 <p><img src="http://r2cex8oik.hn-bkt.clouddn.com/47.png"></p>
+<h2 id="索引最佳实践"><a href="#索引最佳实践" class="headerlink" title="索引最佳实践"></a>索引最佳实践</h2><p>定义实例表并插入数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `employees`</span><br><span class="line">(</span><br><span class="line">    `id`        int(11)     NOT NULL AUTO_INCREMENT,</span><br><span class="line">    `name`      varchar(24) NOT NULL DEFAULT &#x27;&#x27; COMMENT &#x27;姓名&#x27;,</span><br><span class="line">    `age`       int(11)     NOT NULL DEFAULT &#x27;0&#x27; COMMENT &#x27;年龄&#x27;,</span><br><span class="line">    `position`  varchar(20) NOT NULL DEFAULT &#x27;&#x27; COMMENT &#x27;职位&#x27;,</span><br><span class="line">    `hire_time` timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#x27;入职时间&#x27;,</span><br><span class="line">    PRIMARY KEY (`id`),</span><br><span class="line">    KEY `idx_name_age_position` (`name`, `age`, `position`) USING BTREE</span><br><span class="line">) ENGINE = InnoDB</span><br><span class="line">  AUTO_INCREMENT = 4</span><br><span class="line">  DEFAULT CHARSET = utf8 COMMENT =&#x27;员工记录表&#x27;;</span><br><span class="line"></span><br><span class="line">INSERT INTO employees(name, age, position, hire_time) VALUES (&#x27;LiLei&#x27;, 22, &#x27;manager&#x27;, NOW());</span><br><span class="line">INSERT INTO employees(name, age, position, hire_time)VALUES (&#x27;HanMeimei&#x27;,23, &#x27;dev&#x27;, NOW());</span><br><span class="line">INSERT INTO employees(name, age, position, hire_time)VALUES (&#x27;Lucy&#x27;, 23, &#x27;dev&#x27;, NOW());</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-全值匹配"><a href="#1-全值匹配" class="headerlink" title="1.全值匹配"></a>1.全值匹配</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name= &#x27;LiLei&#x27; AND age = 22;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/48.png"></p>
+<h4 id="2-最左前缀法则"><a href="#2-最左前缀法则" class="headerlink" title="2.最左前缀法则"></a>2.最左前缀法则</h4><p>如果索引了多列，要遵守最左前缀法则。指的是查询从索引的最左前列开始并且不跳过索引中的列。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name = &#x27;Bill&#x27; and age = 31;</span><br><span class="line">EXPLAIN SELECT * FROM employees WHERE age = 30 AND position = &#x27;dev&#x27;;</span><br><span class="line">EXPLAIN SELECT * FROM employees WHERE position = &#x27;manager&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/49.png"></p>
+<h4 id="3-不在索引列上做任何操作（计算、函数、（自动or手动）类型转换），会导致索引失效而转向全表扫描"><a href="#3-不在索引列上做任何操作（计算、函数、（自动or手动）类型转换），会导致索引失效而转向全表扫描" class="headerlink" title="3.不在索引列上做任何操作（计算、函数、（自动or手动）类型转换），会导致索引失效而转向全表扫描"></a>3.不在索引列上做任何操作（计算、函数、（自动or手动）类型转换），会导致索引失效而转向全表扫描</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE left(name,3) = &#x27;LiLei&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/50.png"></p>
+<h4 id="4-存储引擎不能使用索引中范围条件右边的列"><a href="#4-存储引擎不能使用索引中范围条件右边的列" class="headerlink" title="4.存储引擎不能使用索引中范围条件右边的列"></a>4.存储引擎不能使用索引中范围条件右边的列</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name= &#x27;LiLei&#x27; AND age &gt; 22 AND position =&#x27;manager&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/51.png"></p>
+<h4 id="5-尽量使用覆盖索引（只访问索引的查询（索引列包含查询列）），减少-select-语句"><a href="#5-尽量使用覆盖索引（只访问索引的查询（索引列包含查询列）），减少-select-语句" class="headerlink" title="5.尽量使用覆盖索引（只访问索引的查询（索引列包含查询列）），减少 select * 语句"></a>5.尽量使用覆盖索引（只访问索引的查询（索引列包含查询列）），减少 select * 语句</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name= &#x27;LiLei&#x27; AND age = 23 AND position =&#x27;manager&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-mysql在使用不等于（！-或者-lt-gt-），not-in-，not-exists-的时候无法使用索引会导致全表扫描-lt-小于、-gt-大于、-lt-、-gt-这些，MySQL内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引"><a href="#6-mysql在使用不等于（！-或者-lt-gt-），not-in-，not-exists-的时候无法使用索引会导致全表扫描-lt-小于、-gt-大于、-lt-、-gt-这些，MySQL内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引" class="headerlink" title="6.mysql在使用不等于（！=或者&lt;&gt;），not in ，not exists 的时候无法使用索引会导致全表扫描&lt; 小于、 &gt; 大于、 &lt;=、&gt;= 这些，MySQL内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引"></a>6.mysql在使用不等于（！=或者&lt;&gt;），not in ，not exists 的时候无法使用索引会导致全表扫描&lt; 小于、 &gt; 大于、 &lt;=、&gt;= 这些，MySQL内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name != &#x27;LiLei&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/52.png"></p>
+<h4 id="7-is-null-is-not-null-一般情况下也无法使用索引"><a href="#7-is-null-is-not-null-一般情况下也无法使用索引" class="headerlink" title="7.is null,is not null 一般情况下也无法使用索引"></a>7.is null,is not null 一般情况下也无法使用索引</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name is null</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/53.png"></p>
+<h4 id="8-like以通配符开头（’-abc…’）mysql索引失效会变成全表扫描操作"><a href="#8-like以通配符开头（’-abc…’）mysql索引失效会变成全表扫描操作" class="headerlink" title="8.like以通配符开头（’$abc…’）mysql索引失效会变成全表扫描操作"></a>8.like以通配符开头（’$abc…’）mysql索引失效会变成全表扫描操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name like &#x27;%Lei&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/54.png"></p>
+<p>问题：解决like’%字符串%’索引不被使用的方法？</p>
+<p>a）使用覆盖索引，查询字段必须是建立覆盖索引字段</p>
+<p>b）如果不能使用覆盖索引则可能需要借助搜索引擎</p>
+<h4 id="9-字符串不加单引号索引失效"><a href="#9-字符串不加单引号索引失效" class="headerlink" title="9.字符串不加单引号索引失效"></a>9.字符串不加单引号索引失效</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name = 1000;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/55.png"></p>
+<h4 id="10-少用or或in，用它查询时，MySQL不一定使用索引，mysql内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引。"><a href="#10-少用or或in，用它查询时，MySQL不一定使用索引，mysql内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引。" class="headerlink" title="10.少用or或in，用它查询时，MySQL不一定使用索引，mysql内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引。"></a>10.少用or或in，用它查询时，MySQL不一定使用索引，mysql内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引。</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN SELECT * FROM employees WHERE name = &#x27;LiLei&#x27; or name = &#x27;HanMeimei&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/56.png"></p>
+<h4 id="11-范围查询优化"><a href="#11-范围查询优化" class="headerlink" title="11.范围查询优化"></a>11.范围查询优化</h4><p>给年龄添加单值索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `employees` ADD INDEX `idx_age` (`age`) USING BTREE ;</span><br><span class="line">explain select * from employees where age &gt;=1 and age &lt;=2000;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/57.png"></p>
+<p>没走索引原因：MySQL内部优化器会根据检索比例、表大小等多个因素整体评估是否使用索引。比如这个例子，可能是由于单次数据量查询过大导致优化器最终选择不走索引。<br>优化方法：可以将大的范围拆分成多个小范围</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">explain select * from employees where age &gt;=1 and age &lt;=1000;</span><br><span class="line">explain select * from employees where age &gt;=1001 and age &lt;=2000;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/58.png"></p>
 
       
     </div>
