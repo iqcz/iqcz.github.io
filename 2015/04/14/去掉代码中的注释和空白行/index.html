@@ -5,17 +5,19 @@
   
 
   
-  <title>归档: 2013/1 | 当代十八线浪漫主义码农诗人</title>
+  <title>去掉代码中的注释和空白行 | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java | Code | Book | Algorithm">
-<meta property="og:type" content="website">
-<meta property="og:title" content="当代十八线浪漫主义码农诗人">
-<meta property="og:url" content="http://example.com/archives/2013/01/index.html">
+  <meta name="description" content="当我们要删除shell脚本中多余的注释和空白行时，可以使用以下代码：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="去掉代码中的注释和空白行">
+<meta property="og:url" content="http://example.com/2015/04/14/%E5%8E%BB%E6%8E%89%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E6%B3%A8%E9%87%8A%E5%92%8C%E7%A9%BA%E7%99%BD%E8%A1%8C/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="Java | Code | Book | Algorithm">
+<meta property="og:description" content="当我们要删除shell脚本中多余的注释和空白行时，可以使用以下代码：">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-04-14T08:50:19.000Z">
+<meta property="article:modified_time" content="2021-12-01T08:52:16.500Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
-<meta property="article:tag" content="Java, Code, 程序员, 分布式, 算法">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
@@ -67,40 +69,70 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2013" class="archive-year">2013</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2013/01/22/%E5%8D%95%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  <time datetime="2013-01-22T15:00:01.000Z" itemprop="datePublished">1月 22</time>
+        <section id="main"><article id="post-去掉代码中的注释和空白行" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/14/%E5%8E%BB%E6%8E%89%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E6%B3%A8%E9%87%8A%E5%92%8C%E7%A9%BA%E7%99%BD%E8%A1%8C/" class="article-date">
+  <time datetime="2015-04-14T08:50:19.000Z" itemprop="datePublished">2015-04-14</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2013/01/22/%E5%8D%95%E9%93%BE%E8%A1%A8%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/">单链表常见操作</a>
+    <h1 class="article-title" itemprop="name">
+      去掉代码中的注释和空白行
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当我们要删除shell脚本中多余的注释和空白行时，可以使用以下代码：</p>
+<span id="more"></span>
 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Predicate;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从文本中读取脚本代码，去掉注释(&quot;#&quot;) 和空白行</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Felix</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StreamFilterDemo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Predicate&lt;String&gt; notCommentOrEmptyLine = (line) -&gt; line.trim().length() &gt; <span class="number">0</span> &amp;&amp; !line.trim().startsWith(<span class="string">&quot;#&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span> (FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">&quot;src/example.txt&quot;</span>); BufferedReader br = <span class="keyword">new</span> BufferedReader(fr)) &#123;</span><br><span class="line">        Stream&lt;String&gt; lines = br.lines();</span><br><span class="line">        lines.filter(notCommentOrEmptyLine).forEach(System.out::println);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>example.txt文件中的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Set path so it includes user<span class="string">&#x27;s private bin if it exists</span></span></span><br><span class="line">if [ -d &quot;$HOME/bin&quot; ] ; then</span><br><span class="line">    PATH=&quot;$HOME/bin:$PATH&quot;</span><br><span class="line"></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2015/04/14/%E5%8E%BB%E6%8E%89%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E6%B3%A8%E9%87%8A%E5%92%8C%E7%A9%BA%E7%99%BD%E8%A1%8C/" data-id="ckwnajrx00000b4tweoey71j0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《历代经济变革得失》读后感
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/21/Oracle%E4%B8%AD%E5%AE%9A%E4%B9%89package%E4%BB%A5%E5%8F%8A%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Oracle中定义package以及存储过程的使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
