@@ -5,17 +5,19 @@
   
 
   
-  <title>归档: 2019/8 | 当代十八线浪漫主义码农诗人</title>
+  <title>Oracle Client Language Problem | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java | Code | Book | Algorithm">
-<meta property="og:type" content="website">
-<meta property="og:title" content="当代十八线浪漫主义码农诗人">
-<meta property="og:url" content="http://example.com/archives/2019/08/index.html">
+  <meta name="description" content="If you execute SP in the Oracle client and got the error like this:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle Client Language Problem">
+<meta property="og:url" content="http://example.com/2015/01/27/Oracle-Client-Language-Problem/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="Java | Code | Book | Algorithm">
+<meta property="og:description" content="If you execute SP in the Oracle client and got the error like this:">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-01-27T07:58:09.000Z">
+<meta property="article:modified_time" content="2021-12-01T07:59:25.771Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
-<meta property="article:tag" content="Java, Code, 程序员, 分布式, 算法">
+<meta property="article:tag" content="Oracle">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
@@ -67,40 +69,76 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/12/Explain%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%B4%A2%E5%BC%95%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="archive-article-date">
-  <time datetime="2019-08-12T01:37:08.000Z" itemprop="datePublished">8月 12</time>
+        <section id="main"><article id="post-Oracle-Client-Language-Problem" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/27/Oracle-Client-Language-Problem/" class="article-date">
+  <time datetime="2015-01-27T07:58:09.000Z" itemprop="datePublished">2015-01-27</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/12/Explain%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%B4%A2%E5%BC%95%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">Explain详解与索引最佳实践</a>
+    <h1 class="article-title" itemprop="name">
+      Oracle Client Language Problem
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>If you execute SP in the Oracle client and got the error like this:</p>
+<span id="more"></span>
 
+<p>oracle.xdo.XDOException:  oracle.xdo.XDOException:  oracle.xdo.dataengine.datasource.plugin.DataAccessException:  java.sql.SQLException: ORA-06502: PL/SQL: æ•°å­—æˆ–å€¼é”™è¯¯ : character string buffer too  small ORA-06512: åœ¨  “FAISOWNER_SIT.PROFITLOSSREP_DG_PACK”, line 1007 ORA-06512: åœ¨  “FAISOWNER_SIT.AMRETURNREP_DG_PACK”, line 810 ORA-06512: åœ¨  “FAISOWNER_SIT.AMRETURNREP_DG_PACK”, line 1058 </p>
+<p>Maybe it’s the language problem.</p>
+<p>Execute this SQL:</p>
+<p>​        select userenv(‘language’) from dual</p>
+<p>​        </p>
+<p>​        if is SIMPLIFIED CHINESE_CHINA.ZHS16GBK, need to change “AMERICAN_AMERICA.AL32UTF8”.</p>
+<p>open regedit Commend,</p>
+<p>find path “HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ORACLE\KEY_OraClient11g_home1”</p>
+<p>​      find the key is “NLS_LANG”, change name is “AMERICAN_AMERICA.AL32UTF8”</p>
+<p>In the CMD window:</p>
+<p>C:\Users&gt;set NLS_LANG=AMERICAN_AMERICA.AL32UTF8 C:\Users&gt;echo %NLS_LANG%AMERICAN_AMERICA.AL32UTF8 C:\Users&gt;“C:\Users\software\Toad  for Oracle 10.6\Toad.exe” </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2015/01/27/Oracle-Client-Language-Problem/" data-id="ckwn8o0o60000rgtwdmqm3viz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《历代经济变革得失》读后感
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/07/03/Linux-shell%E4%B8%8B30%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux shell下30个有趣的命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
