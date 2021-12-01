@@ -5,17 +5,17 @@
   
 
   
-  <title>Oracle Client Language Problem | 当代十八线浪漫主义码农诗人</title>
+  <title>Oracle中定义package以及存储过程的使用 | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="If you execute SP in the Oracle client and got the error like this:">
+  <meta name="description" content="使用scott账户下的dept表； select * from dept order by deptno; 10 ACCOUNTING NEW YORK 20 RESEARCH DALLAS 30 SALES CHICAGO 40 OPERATIONS BOSTON 为了演示方便，插入一条数据： insert into dept(deptno, dname, loc) values(50,’SYS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle Client Language Problem">
-<meta property="og:url" content="http://example.com/2015/01/27/Oracle-Client-Language-Problem/index.html">
+<meta property="og:title" content="Oracle中定义package以及存储过程的使用">
+<meta property="og:url" content="http://example.com/2015/03/21/Oracle%E4%B8%AD%E5%AE%9A%E4%B9%89package%E4%BB%A5%E5%8F%8A%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="If you execute SP in the Oracle client and got the error like this:">
+<meta property="og:description" content="使用scott账户下的dept表； select * from dept order by deptno; 10 ACCOUNTING NEW YORK 20 RESEARCH DALLAS 30 SALES CHICAGO 40 OPERATIONS BOSTON 为了演示方便，插入一条数据： insert into dept(deptno, dname, loc) values(50,’SYS">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2015-01-27T07:58:09.000Z">
-<meta property="article:modified_time" content="2021-12-01T07:59:25.771Z">
+<meta property="article:published_time" content="2015-03-21T08:46:44.000Z">
+<meta property="article:modified_time" content="2021-12-01T08:48:05.645Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
 <meta property="article:tag" content="Oracle">
 <meta name="twitter:card" content="summary">
@@ -69,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Oracle-Client-Language-Problem" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Oracle中定义package以及存储过程的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/01/27/Oracle-Client-Language-Problem/" class="article-date">
-  <time datetime="2015-01-27T07:58:09.000Z" itemprop="datePublished">2015-01-27</time>
+    <a href="/2015/03/21/Oracle%E4%B8%AD%E5%AE%9A%E4%B9%89package%E4%BB%A5%E5%8F%8A%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2015-03-21T08:46:44.000Z" itemprop="datePublished">2015-03-21</time>
 </a>
     
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Oracle Client Language Problem
+      Oracle中定义package以及存储过程的使用
     </h1>
   
 
@@ -91,25 +91,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>If you execute SP in the Oracle client and got the error like this:</p>
-<span id="more"></span>
+        <p>使用scott账户下的dept表；</p>
+<p>select * from dept order by deptno;</p>
+<p>10 ACCOUNTING NEW YORK</p>
+<p>20 RESEARCH DALLAS</p>
+<p>30 SALES CHICAGO</p>
+<p>40 OPERATIONS BOSTON</p>
+<p>为了演示方便，插入一条数据：</p>
+<p>insert into dept(deptno, dname, loc) values(50,’SYSTEM’, ‘NEW YORK’);</p>
+<p>新插入的记录为：50 SYSTEM NEW YORK</p>
+<p>我们主要演示在package中存储过程的返回类型为pipelined table，cursor 和 value三种。</p>
+<p>1.返回类型为pipelined table。　　</p>
+<p>create or REPLACE type dept_obj is OBJECT( DEPTNO NUMBER(2,0), DNAME VARCHAR2(14 BYTE) );</p>
+<p>create or REPLACE type dept_obj_type AS table of dept_obj;</p>
+<p>2.定义package 和package body。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"> 1 create or replace package SPTest</span><br><span class="line"> 2 is</span><br><span class="line"> 3 /*return a pipelined demo start*/</span><br><span class="line"> 4 type dept_data_rec_type is RECORD(</span><br><span class="line"> 5   DEPTNO NUMBER(2,0),</span><br><span class="line"> 6      DNAME VARCHAR2(14)</span><br><span class="line"> 7 );</span><br><span class="line"> 8 </span><br><span class="line"> 9 type dept_ref_type is REF CURSOR;</span><br><span class="line">10 </span><br><span class="line">11 function getDept(in_loc IN VARCHAR2) return dept_obj_type pipelined;</span><br><span class="line">12 /*return a pipelined demo end*/</span><br><span class="line">13 </span><br><span class="line">14 /*return a cursor demo start*/</span><br><span class="line">15 FUNCTION getDeptInfo(in_deptno IN dept.deptno%TYPE) RETURN dept_ref_type;</span><br><span class="line">16 /*return a cursor demo end*/</span><br><span class="line">17 </span><br><span class="line">18 /* return a varchar value start */</span><br><span class="line">19 function getName(in_deptno in number) RETURN VARCHAR2;</span><br><span class="line">20 /* return a varchar value end */</span><br><span class="line">21 end SPTest;</span><br><span class="line">22 /</span><br><span class="line">23 -----------------------------------------------------------------------------------------------</span><br><span class="line">24 create or replace package body SPTest</span><br><span class="line">25 is</span><br><span class="line">26   /*return a pipelined demo start*/</span><br><span class="line">27   function getDept(in_loc IN VARCHAR2) return dept_obj_type pipelined is</span><br><span class="line">28     l_dept_obj dept_obj :=dept_obj(null, null);</span><br><span class="line">29     dept_ref_type_cursor dept_ref_type;</span><br><span class="line">30     dept_data_rec        dept_data_rec_type;</span><br><span class="line">31   begin</span><br><span class="line">32     open dept_ref_type_cursor</span><br><span class="line">33     for select deptno, dname from dept where loc = in_loc;</span><br><span class="line">34    </span><br><span class="line">35     loop</span><br><span class="line">36     fetch dept_ref_type_cursor into dept_data_rec;</span><br><span class="line">37     exit when dept_ref_type_cursor%NOTFOUND;</span><br><span class="line">38     l_dept_obj.DEPTNO := dept_data_rec.DEPTNO;</span><br><span class="line">39     l_dept_obj.DNAME := dept_data_rec.DNAME;</span><br><span class="line">40    </span><br><span class="line">41     pipe row(l_dept_obj);</span><br><span class="line">42     end loop;</span><br><span class="line">43     close dept_ref_type_cursor;</span><br><span class="line">44     RETURN ;</span><br><span class="line">45   end getDept;</span><br><span class="line">46   /*return a pipelined demo end*/</span><br><span class="line">47   </span><br><span class="line">48   /*return a cursor demo start*/</span><br><span class="line">49   FUNCTION getDeptInfo(in_deptno IN dept.deptno%TYPE) RETURN dept_ref_type</span><br><span class="line">50   AS</span><br><span class="line">51           dept_ref_type_cursor dept_ref_type;        </span><br><span class="line">52      BEGIN</span><br><span class="line">53     </span><br><span class="line">54      OPEN dept_ref_type_cursor FOR</span><br><span class="line">55           SELECT deptno, dname, loc FROM dept where deptno = in_deptno;</span><br><span class="line">56     </span><br><span class="line">57      RETURN dept_ref_type_cursor;</span><br><span class="line">58     </span><br><span class="line">59      END getDeptInfo;</span><br><span class="line">60   /*return a cursor demo end*/</span><br><span class="line">61   </span><br><span class="line">62   /* return a varchar value start */</span><br><span class="line">63   function getName(in_deptno in number) RETURN VARCHAR2</span><br><span class="line">64   as rtn_deptname VARCHAR2(100);</span><br><span class="line">65   begin</span><br><span class="line">66     select dname into rtn_deptname from dept where deptno = in_deptno;</span><br><span class="line">67     RETURN rtn_deptname;</span><br><span class="line">68   end getName;</span><br><span class="line">69   /* return a varchar value start */</span><br><span class="line">70   </span><br><span class="line">71 end SPTest;</span><br><span class="line">72 /</span><br></pre></td></tr></table></figure>
 
-<p>oracle.xdo.XDOException:  oracle.xdo.XDOException:  oracle.xdo.dataengine.datasource.plugin.DataAccessException:  java.sql.SQLException: ORA-06502: PL/SQL: æ•°å­—æˆ–å€¼é”™è¯¯ : character string buffer too  small ORA-06512: åœ¨  “FAISOWNER_SIT.PROFITLOSSREP_DG_PACK”, line 1007 ORA-06512: åœ¨  “FAISOWNER_SIT.AMRETURNREP_DG_PACK”, line 810 ORA-06512: åœ¨  “FAISOWNER_SIT.AMRETURNREP_DG_PACK”, line 1058 </p>
-<p>Maybe it’s the language problem.</p>
-<p>Execute this SQL:</p>
-<p>​        select userenv(‘language’) from dual</p>
-<p>​        </p>
-<p>​        if is SIMPLIFIED CHINESE_CHINA.ZHS16GBK, need to change “AMERICAN_AMERICA.AL32UTF8”.</p>
-<p>open regedit Commend,</p>
-<p>find path “HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ORACLE\KEY_OraClient11g_home1”</p>
-<p>​      find the key is “NLS_LANG”, change name is “AMERICAN_AMERICA.AL32UTF8”</p>
-<p>In the CMD window:</p>
-<p>C:\Users&gt;set NLS_LANG=AMERICAN_AMERICA.AL32UTF8 C:\Users&gt;echo %NLS_LANG%AMERICAN_AMERICA.AL32UTF8 C:\Users&gt;“C:\Users\software\Toad  for Oracle 10.6\Toad.exe” </p>
+<p>最后，执行存储过程。</p>
+<p>/*返回pipelined table */</p>
+<p>select deptno, dname from table(SPTest.getDept(‘NEW YORK’)) order by deptno;</p>
+<p>/<em>返回cursor</em>/</p>
+<p>select SPTest.getDeptInfo(10) from dual;</p>
+<p>/<em>返回具体值</em>/</p>
+<p>select SPTest.getName(50) from dual;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2015/01/27/Oracle-Client-Language-Problem/" data-id="ckwn8o0o60000rgtwdmqm3viz" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2015/03/21/Oracle%E4%B8%AD%E5%AE%9A%E4%B9%89package%E4%BB%A5%E5%8F%8A%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckwnaeipm00006wtw4ecn1fsy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li></ul>
@@ -120,19 +129,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/02/03/SpringMVC%E7%9A%84%E5%BA%95%E5%B1%82%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/01/24/%E3%80%8A%E5%8E%86%E4%BB%A3%E7%BB%8F%E6%B5%8E%E5%8F%98%E9%9D%A9%E5%BE%97%E5%A4%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          SpringMVC的底层工作原理
+          《历代经济变革得失》读后感
         
       </div>
     </a>
   
   
-    <a href="/2015/01/26/%E6%A0%B9%E6%8D%AE%E4%BC%A0%E9%80%92%E7%9A%84%E5%88%86%E9%9A%94%E7%AC%A6%E8%BF%9E%E6%8E%A5list%E4%B8%AD%E6%89%80%E6%9C%89%E7%9A%84%E5%85%83%E7%B4%A0/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/02/11/WebSphere%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">根据传递的分隔符连接list中所有的元素</div>
+      <div class="article-nav-title">WebSphere数据源配置</div>
     </a>
   
 </nav>
