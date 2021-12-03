@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Redis缓存相关问题 | 当代十八线浪漫主义码农诗人</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="缓存几大问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis缓存相关问题">
+<meta property="og:url" content="http://example.com/2021/01/03/Redis%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
+<meta property="og:description" content="缓存几大问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-03T04:11:15.000Z">
+<meta property="article:modified_time" content="2021-12-03T04:18:43.518Z">
+<meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">当代十八线浪漫主义码农诗人</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Redis缓存相关问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/03/Redis%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2021-01-03T04:11:15.000Z" itemprop="datePublished">2021-01-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis缓存相关问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="缓存几大问题"><a href="#缓存几大问题" class="headerlink" title="缓存几大问题"></a>缓存几大问题</h1><span id="more"></span>
+
+<h2 id="1-缓存粒度控制"><a href="#1-缓存粒度控制" class="headerlink" title="1.缓存粒度控制"></a>1.缓存粒度控制</h2><p>通俗来讲，缓存粒度问题就是我们在使用缓存时，是将所有数据缓存还是缓存部分数据？</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">通用性</th>
+<th align="center">空间占用（内存空间+网络码率）</th>
+<th align="center">代码维护</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">全部数据</td>
+<td align="center">高</td>
+<td align="center">大</td>
+<td align="center">简单</td>
+</tr>
+<tr>
+<td align="center">部分数据</td>
+<td align="center">低</td>
+<td align="center">小</td>
+<td align="center">较为复杂</td>
+</tr>
+</tbody></table>
+<p>缓存粒度问题是一个容易被忽视的问题，如果使用不当，可能会造成很多无用空间的浪费，可能会造成网络带宽的浪费，可能会造成代码通用性较差等情况，必须学会综合数据通用性、空间占用比、代码维护性 三点评估取舍因素权衡使用。</p>
+<h2 id="2-缓存穿透问题"><a href="#2-缓存穿透问题" class="headerlink" title="2.缓存穿透问题"></a>2.缓存穿透问题</h2><p>缓存穿透是指查询一个一定不存在的数据，由于缓存不命中，并且出于容错考虑， 如果从存储层查不到数据则不写入缓存，这将导致这个不存在的数据每次请求都要到存储层去查询，失去了缓存的意义。概括来讲缓存中没有，数据库中也没有。</p>
+<h3 id="可能造成原因："><a href="#可能造成原因：" class="headerlink" title="可能造成原因："></a>可能造成原因：</h3><p>1.业务代码自身问题<br>2.恶意攻击。爬虫等等</p>
+<h3 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h3><p> 对底层数据源压力过大，有些底层数据源不具备高并发性。  例如mysql一般来说单台能够扛1000-QPS就已经很不错了。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1.缓存空对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NullValueResultDO</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">6550539547145486005L</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserManager</span> </span>&#123;</span><br><span class="line">     UserDAO userDAO;</span><br><span class="line">     LocalCache localCache;</span><br><span class="line"> </span><br><span class="line">     <span class="function"><span class="keyword">public</span> UserDO <span class="title">getUser</span><span class="params">(String userNick)</span> </span>&#123;</span><br><span class="line">          Object object = localCache.get(userNick);</span><br><span class="line">          <span class="keyword">if</span>(object != <span class="keyword">null</span>) &#123;</span><br><span class="line">               <span class="keyword">if</span>(object <span class="keyword">instanceof</span> NullValueResultDO) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">return</span> (UserDO)object;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               User user = userDAO.getUser(userNick);</span><br><span class="line">               <span class="keyword">if</span>(user != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    localCache.put(userNick,user);</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    localCache.put(userNick, <span class="keyword">new</span> NullValueResultDO());</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">return</span> user;</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;          </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.布隆过滤器</p>
+<p>1）Google布隆过滤器的缺点</p>
+<p>​        基于JVM内存的一种布隆过滤器<br>​        重启即失效<br>​        本地内存无法用在分布式场景<br>​        不支持大数据量存储<br>2）Redis布隆过滤器</p>
+<p>可扩展性Bloom过滤器：一旦Bloom过滤器达到容量，就会在其上创建一个新的过滤器<br>不存在重启即失效或者定时任务维护的成本：基于Google实现的布隆过滤器需要启动之后初始化布隆过滤器<br>缺点：需要网络IO，性能比Google布隆过滤器低</p>
+<p>3.对参数增加合法性验证</p>
+<h2 id="3-缓存击穿-热点key重建缓存问题"><a href="#3-缓存击穿-热点key重建缓存问题" class="headerlink" title="3.缓存击穿.热点key重建缓存问题"></a>3.缓存击穿.热点key重建缓存问题</h2><p>缓存击穿是指缓存中没有但数据库中有的数据（一般是缓存时间到期），这时由于并发用户特别多，同时读缓存没读到数据，又同时去数据库去取数据，引起数据库压力瞬间增大，造成过大压力</p>
+<p>我们知道，使用缓存，如果获取不到，才会去数据库里获取。但是如果是热点 key，访问量非常的大，数据库在重建缓存的时候，会出现很多线程同时重建的情况。因为高并发导致的大量热点的 key 在重建还没完成的时候，不断被重建缓存的过程，由于大量线程都去做重建缓存工作，导致服务器拖慢的情况。</p>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="1-互斥锁"><a href="#1-互斥锁" class="headerlink" title="1.互斥锁"></a>1.互斥锁</h4><p>第一次获取缓存的时候，加一个锁，然后查询数据库，接着是重建缓存。这个时候，另外一个请求又过来获取缓存，发现有个锁，这个时候就去等待，之后都是一次等待的过程，直到重建完成以后，锁解除后再次获取缓存命中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getKey</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">    String value = redis.get(key);</span><br><span class="line">    <span class="keyword">if</span>(value == <span class="keyword">null</span>)&#123;</span><br><span class="line">        String mutexKey = <span class="string">&quot;mutex:key:&quot;</span>+key; <span class="comment">//设置互斥锁的key</span></span><br><span class="line">        <span class="keyword">if</span>(redis.set(mutexKey,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;ex 180&quot;</span>,<span class="string">&quot;nx&quot;</span>))&#123; <span class="comment">//给这个key上一把锁，ex表示只有一个线程能执行，过期时间为180秒</span></span><br><span class="line">          value = db.get(key);</span><br><span class="line">          redis.set(key,value);</span><br><span class="line">          redis.delete(mutexKety);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 其他的线程休息100毫秒后重试</span></span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        getKey(key);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>互斥锁的优点是思路非常简单，具有一致性，但是互斥锁也有一定的问题，就是大量线程在等待的问题。存在死锁的可能性。</p>
+<h2 id="4-缓存雪崩问题"><a href="#4-缓存雪崩问题" class="headerlink" title="4.缓存雪崩问题"></a>4.缓存雪崩问题</h2><p>缓存雪崩是指机器宕机或在我们设置缓存时采用了相同的过期时间，导致缓存在某一时刻同时失效，请求全部转发到DB，DB瞬时压力过重雪崩。</p>
+<p>1：在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个key只允许一个线程查询数据和写缓存，其他线程等待。</p>
+<p>2：做二级缓存，A1为原始缓存，A2为拷贝缓存，A1失效时，可以访问A2，A1缓存失效时间设置为短期，A2设置为长期</p>
+<p>3：不同的key，设置不同的过期时间，让缓存失效的时间点尽量均匀。</p>
+<p>4：如果缓存数据库是分布式部署，将热点数据均匀分布在不同搞得缓存数据库中。</p>
+<h1 id="5-缓存与数据库数据一致性问题"><a href="#5-缓存与数据库数据一致性问题" class="headerlink" title="5.缓存与数据库数据一致性问题"></a>5.缓存与数据库数据一致性问题</h1><p>当我们对数据进行修改的时候，到底是先删缓存，还是先写数据库？</p>
+<p>1、如果先删缓存，再写数据库： 在高并发场景下，当第一个线程删除了缓存，还没有来得及写数据库，第二个线程来读取数据，会发现缓存中的数据为空，那就会去读数据库中的数据(旧值，脏数据)，读完之后，把读到的结果写入缓存(此时，第一个线程已经将新的值写到缓存里面了)，这样缓存中的值就会被覆盖为修改前的脏数据。 </p>
+<p>总结：在这种方式下，通常要求写操作不会太频繁。</p>
+<p>解决方案：</p>
+<p>1）先操作缓存，但是不删除缓存。将缓存修改为一个特殊值(-999)。客户端读缓存时，发现是默认值，就休眠一小会，再去查一次Redis。 -》 特殊值对业务有侵入。 休眠时间，可能会多次重复，对性能有影响。</p>
+<p>2）延时双删。 先删除缓存，然后再写数据库，休眠一小会，再次删除缓存。-》 如果数据写操作很频繁，同样还是会有脏数据的问题。</p>
+<p>2、先写数据库，再删缓存： 如果数据库写完了之后，缓存删除失败，数据就会不一致。</p>
+<p>总结： 始终只能保证一定时间内的最终一致性。</p>
+<p>解决方案：</p>
+<p> 1）给缓存设置一个过期时间  问题：过期时间内，缓存数据不会更新。</p>
+<p>2）引入MQ，保证原子操作。</p>
+<p>解决方案：将热点数据缓存设置为永不过期，但是在value当中写入一个逻辑上的过期时间，另外起一个后台线程，扫描这些key，对于已逻辑上过期的缓存，进行删除。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/03/Redis%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" data-id="ckwpvnr6a0000qktwfio61vyc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/12/MyBatis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MyBatis源码解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">15</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-MacOS/" rel="tag">Java, MacOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL-Server/" rel="tag">SQL Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/" rel="tag">Spring MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSphere/" rel="tag">WebSphere</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%85%E8%AF%BB/" rel="tag">阅读</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">一月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/03/Redis%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">Redis缓存相关问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/12/MyBatis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">MyBatis源码解析</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/02/MVCC%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/">MVCC多版本并发控制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/08/%E3%80%8A%E6%98%A5%E7%90%B4%E6%8A%84%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/">《春琴抄》读后感</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Explain%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%B4%A2%E5%BC%95%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">Explain详解与索引最佳实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 公众号：书香颜 | 微信号: phideonvw<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
