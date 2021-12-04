@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java学习内容总结 | 当代十八线浪漫主义码农诗人</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近对Core Java基础做了一些学习。有自己的见解，也有别人的总结，供大家参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习内容总结">
+<meta property="og:url" content="http://example.com/2017/09/14/Java%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
+<meta property="og:description" content="最近对Core Java基础做了一些学习。有自己的见解，也有别人的总结，供大家参考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-09-14T11:22:39.000Z">
+<meta property="article:modified_time" content="2021-12-04T11:24:20.958Z">
+<meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">当代十八线浪漫主义码农诗人</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java学习内容总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/14/Java%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2017-09-14T11:22:39.000Z" itemprop="datePublished">2017-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java学习内容总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近对Core Java基础做了一些学习。有自己的见解，也有别人的总结，供大家参考。</p>
+<span id="more"></span>
+
+<h3 id="1-实现多线程的方式有几种？"><a href="#1-实现多线程的方式有几种？" class="headerlink" title="1 实现多线程的方式有几种？"></a>1 实现多线程的方式有几种？</h3><p>其实这个问题并不难，只是在这里做一个总结。一共有三种。</p>
+<ul>
+<li>实现<code>Runnable</code>接口，并实现该接口的<code>run()</code>方法</li>
+<li>继承<code>Thread</code>类，重写<code>run()</code>方法</li>
+<li>实现<code>Callable</code>接口，实现<code>call()</code>方法。</li>
+</ul>
+<p>大家可能对前两种已经很清楚了，重点说下第三种。<br><code>Callable</code>接口是属于<code>Executor</code>框架中的类，<code>Callable</code> 接口与<code>Runnable</code>接口类似，但比后者功能更加强大，主要有三点：</p>
+<ol>
+<li><code>Callable</code>可以在任务结束后提供一个返回值，<code>Runnable</code>无法提供这个功能；</li>
+<li><code>Callable</code>的<code>call()</code>方法可以抛出异常，<code>Runnable</code>接口的<code>run()</code>方法不能抛出异常；</li>
+<li>运行<code>Callable</code>可以得到一个<code>Future</code>对象，<code>Future</code>对象表示异步计算的结果。它提供了检查计算是否完成的方法。由于线程属于异步计算模型，所以无法从其他线程中得到方法的返回值。在这种情况下，就可以使用<code>Future</code>来监视目标线程调用<code>call()</code>方法的情况。当调用<code>Futrue</code>的<code>get()</code>方法以获取结果时，当前线程就会阻塞，直到<code>call()</code>方法结束返回结果。</li>
+</ol>
+<p>举个例子，此代码在JDK 8 下运行，因为使用了lambda表达式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallableAndFuture</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	ExecutorService threadPool = Executors.newSingleThreadExecutor();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 启动线程</span></span><br><span class="line">	Future&lt;String&gt; future = threadPool.submit(() -&gt; <span class="string">&quot;Hello, world&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">	    System.out.println(<span class="string">&quot;waiting thread to finish.&quot;</span>);</span><br><span class="line">	    System.out.println(future.get()); <span class="comment">// 等待线程结束，并获取返回结果</span></span><br><span class="line">	    </span><br><span class="line">	    threadPool.shutdown();</span><br><span class="line">	&#125; <span class="keyword">catch</span> (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">	    e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-volatile关键字的作用"><a href="#2-volatile关键字的作用" class="headerlink" title="2 volatile关键字的作用"></a>2 <code>volatile</code>关键字的作用</h3><p>在Java语言中，有时候为了提高程序的运行效率，编译器会做一些优化操作，把经常被访问的变量缓存起来，程序在读取这个变量的时候又有可能直接从寄存器中读取这个值，而不会去内存中读取。这样的好处提高了程序的运行效率，但当遇到多线程编程时，变量的值可能被其他线程改变了，而该缓存的值不会做相应的改变，从而导致应用程序读取的值可能与实际的变量值不一致。关键字<code>volatile</code>正好解决这个问题，被<code>volatile</code>修饰的变量编译器不会做优化，每次都会从内存读取。</p>
+<h3 id="3-代码中不同属性和方法的执行顺序"><a href="#3-代码中不同属性和方法的执行顺序" class="headerlink" title="3 代码中不同属性和方法的执行顺序"></a>3 代码中不同属性和方法的执行顺序</h3><p>经常会遇到一个这样的代码，new一个子类，其子类以及父类每个属性和方法的执行顺序，具体可以看以下例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">**</span><br><span class="line"> * Java程序初始化工作可以在许多不同的代码中来完成，它们执行的顺序如下：</span><br><span class="line"> * 父类静态变量</span><br><span class="line"> * 父类静态代码块</span><br><span class="line"> * 子类静态变量</span><br><span class="line"> * 子类静态代码块</span><br><span class="line"> * 父类非静态变量</span><br><span class="line"> * 父类非静态代码块</span><br><span class="line"> * 父类构造函数</span><br><span class="line"> * 子类非静态变量</span><br><span class="line"> * 子类非静态代码块</span><br><span class="line"> * 子类构造函数</span><br><span class="line"> * </span><br><span class="line"> * </span><br><span class="line"> * 注意，只有方法具有多态性，属性则没有。</span><br><span class="line"> * <span class="meta">@author</span> TurtusLi</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseI</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseI</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    <span class="keyword">this</span>.print();</span><br><span class="line">	    num = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    System.out.println(<span class="string">&quot;Base.num = &quot;</span> + num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example1423</span> <span class="keyword">extends</span> <span class="title">BaseI</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Example1423</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    <span class="keyword">this</span>.print();</span><br><span class="line"></span><br><span class="line">	    num = <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 去掉这个复写方法，运行看效果</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    System.out.println(<span class="string">&quot;Sub.num = &quot;</span> + num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	    BaseI b = <span class="keyword">new</span> Example1423();</span><br><span class="line">	    System.out.println(b.num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-switch语句支持String类型的实现原理"><a href="#4-switch语句支持String类型的实现原理" class="headerlink" title="4 switch语句支持String类型的实现原理"></a>4 <code>switch</code>语句支持<code>String</code>类型的实现原理</h3><p>在Java 7 以后，<code>switch</code>语句可以用作<code>String</code>类型上。</p>
+<p>从本质来讲，<code>switch</code>对字符串的支持，其实也是<code>int</code>类型值的匹配。它的实现原理如下：</p>
+<p>通过对<code>case</code>后面的<code>String</code>对象调用<code>hashCode(</code>)方法，得到一个int类型的Hash值，然后用这个Hash值来唯一标识着这个<code>case</code>。</p>
+<p>那么当匹配的时候，首先调用这个字符串的<code>hashCode()</code>方法，获取一个Hash值（<code>int</code>类型），用这个Hash值来匹配所有的<code>case</code>，如果没有匹配成功，说明不存在；如果匹配成功了，接着会调用字符串的<code>equals()</code>方法进行匹配。</p>
+<p>由此看出，<code>String</code>变量不能是null；同时，<code>switch</code>的<code>case</code>子句中使用的字符串也不能为null。</p>
+<h3 id="5-多线程同步有几种实现方法"><a href="#5-多线程同步有几种实现方法" class="headerlink" title="5 多线程同步有几种实现方法"></a>5 多线程同步有几种实现方法</h3><p>Java主要提供了三种实现同步机制的方法。</p>
+<ol>
+<li><code>synchronized</code>关键字。有两种用法，可以是<code>synchronized</code>方法和<code>synchronized</code>代码块。</li>
+<li><code>wait</code>和<code>notify</code>方法。</li>
+<li><code>Lock</code>。<code>Lock</code>接口有一个实现类<code>ReentrantLock</code>，也可以实现多线程的同步。</li>
+</ol>
+<h3 id="6-在多线程编程的时候有哪些注意事项"><a href="#6-在多线程编程的时候有哪些注意事项" class="headerlink" title="6 在多线程编程的时候有哪些注意事项"></a>6 在多线程编程的时候有哪些注意事项</h3><ol>
+<li>如果能用<code>volatile</code>代替<code>synchronized</code>，近可能使用<code>volatile</code>。因为被<code>synchronized</code>修饰的方法或代码块在同一时间只能允许一个线程访问，而<code>volatile</code>没有这个限制，因此使用<code>synchronized</code>会降低并发量。由于<code>volatile</code>无法保证原子性操作，因此在多线程的情况下，只有对变量的操作为原子操作的情况下才可以使用<code>volatile</code>。</li>
+<li>尽可能减少<code>synchronized</code>块内的代码。</li>
+<li>给每一个线程定义一个名字，这样有利于调试。</li>
+<li>尽量使用concurrent容器（<code>ConcurrentHashMap</code>）来代替<code>synchronized</code>容器（<code>Hashtable</code>）。</li>
+<li>使用线程池来控制多线程的执行。</li>
+</ol>
+<h3 id="7-fail-fast-和fail-safe迭代器的区别是什么？"><a href="#7-fail-fast-和fail-safe迭代器的区别是什么？" class="headerlink" title="7 fail-fast 和fail-safe迭代器的区别是什么？"></a>7 fail-fast 和fail-safe迭代器的区别是什么？</h3><p>他们的主要区别是fail-safe允许在遍历的过程中对容器的数据进行修改，而fail-fast则不允许。下面分别介绍这两种迭代器的工作原理。</p>
+<p>fail-fast：直接在容器上进行遍历，在遍历的过程中，一旦发现容器中的数据被修改了（添加元素、删除或修改元素），就会抛出<code>ConcurrentModificationException</code>异常导致遍历失败。常见的使用fail-fast的容器有<code>HashMap</code>和<code>ArrayList</code>等。</p>
+<p>fail-safe：这种遍历是基于容器的克隆。因此，对容器中内容的修改不影响遍历。常见使用fail-safe方式的容器有<code>ConcurrentHashMap</code>和<code>CopyOnWriteArrayList</code>。</p>
+<h3 id="8-如何能够使JVM中的虚拟机栈、堆内存和方法区发生内存溢出？"><a href="#8-如何能够使JVM中的虚拟机栈、堆内存和方法区发生内存溢出？" class="headerlink" title="8 如何能够使JVM中的虚拟机栈、堆内存和方法区发生内存溢出？"></a>8 如何能够使JVM中的虚拟机栈、堆内存和方法区发生内存溢出？</h3><p>关于JVM的知识，有一本非常好的书籍——周志明《深入理解Java虚拟机：JVM高级特性与最佳实践（第2版）》，里面有非常好的介绍。几乎可以说是Java程序员必读书籍。</p>
+<p>虚拟机栈是线程私有的，当创建一个线程时，同时会新建一个虚拟机栈，它描述的是Java方法执行的内存模型。  栈中有一个非常重要的概念——栈帧。栈帧用于保存局部变量表，操作数栈，方法出口等。</p>
+<p>其实栈溢出最简单的方式是无限递归。</p>
+<p>堆内存是线程共享的，是JVM中内存管理的最大一块内存，它保存所有实例化的对象。</p>
+<p>堆内存溢出最简单的方式是不停的new对象，GC来不及回收，直到内存全部耗尽。</p>
+<p>方法区也是内存共享的。它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<p>方法区溢出简单的方式是，调用<code>String</code>类的<code>intern()</code>方法，此方法如果在堆区找不到已经存在的<code>String</code>对象的话，就会往方法区中的常量池放一份，然后返回其引用放在堆区。还有一种办法是不停地加载类。</p>
+<h3 id="9-在-int-i-0-i-i-语句中，i-i-是线程安全的吗？如果不安全，请说明上面操作在JVM中的执行过程，为什么不安全？说出JDK中哪个类能达到以上程序的效果，并且是线程安全且高效的，简述其原理。"><a href="#9-在-int-i-0-i-i-语句中，i-i-是线程安全的吗？如果不安全，请说明上面操作在JVM中的执行过程，为什么不安全？说出JDK中哪个类能达到以上程序的效果，并且是线程安全且高效的，简述其原理。" class="headerlink" title="9 在 int i =0; i=i++;语句中，i=i++是线程安全的吗？如果不安全，请说明上面操作在JVM中的执行过程，为什么不安全？说出JDK中哪个类能达到以上程序的效果，并且是线程安全且高效的，简述其原理。"></a>9 在 <code>int i =0; i=i++;</code>语句中，<code>i=i++</code>是线程安全的吗？如果不安全，请说明上面操作在JVM中的执行过程，为什么不安全？说出JDK中哪个类能达到以上程序的效果，并且是线程安全且高效的，简述其原理。</h3><p>语句<code>i=i++</code>的执行过程：先把<code>i</code>的值取出来放到栈顶，可以理解为引入了第三方变量<code>k</code>，此时，<code>k</code>的值为<code>i</code>，然后执行自增操作，于是<code>i</code>的值变为<code>1</code>，最后执行赋值操作<code>i=k</code>（自增前的值），因此，执行结束后，<code>i</code>的值还是<code>0</code>。从上面的分析得知，<code>i=i++</code>语句的执行过程是由多个操作组成，它不是原子操作，因此，不是线程安全的。</p>
+<p>在Java中，<code>++i</code>和<code>i++</code>操作并不是线程安全的，在使用的时候，不可避免地会用到<code>synchronized</code>关键字。而<code>AtomicInteger</code>是一个提供原子操作的<code>Integer</code>类，它提供了线程安全且高效的原子操作，是线程安全的，其底层的原理是利用处理器的CAS（Compare And Swap，比较与交换，一种有名的无锁算法）操作来检测栈中的值是否被其他线程改变，如果被改变，则CAS操作失败。这种实现方法在CPU指令级别实现了原子操作，因此，它比使用synchronized来实现同步效率更高。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/09/14/Java%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E6%80%BB%E7%BB%93/" data-id="ckwrqajgo0000mktwhx2mgz7v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/11/Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java对象的内存布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/13/10%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">10种常见的软件架构模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%9D%E8%80%83/">思考</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-MacOS/" rel="tag">Java, MacOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL-Server/" rel="tag">SQL Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/" rel="tag">Spring MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSphere/" rel="tag">WebSphere</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0/" rel="tag">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%85%E8%AF%BB/" rel="tag">阅读</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/206/09/">九月 0206</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/03/Redis%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">Redis缓存相关问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/12/MyBatis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">MyBatis源码解析</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/02/MVCC%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/">MVCC多版本并发控制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/08/%E3%80%8A%E6%98%A5%E7%90%B4%E6%8A%84%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/">《春琴抄》读后感</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Explain%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%B4%A2%E5%BC%95%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">Explain详解与索引最佳实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 公众号：书香颜 | 微信号: phideonvw<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
