@@ -5,22 +5,20 @@
   
 
   
-  <title>SpringMVC的底层工作原理 | 当代十八线浪漫主义码农诗人</title>
+  <title>6种常见的Git错误以及解决办法 | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="下图描述了一个请求在Spring MVC中整个流转的过程：">
+  <meta name="description" content="我们都会犯错误，尤其是在使用像Git这样复杂的东西时。下面介绍如何解决六个最常见的Git错误。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringMVC的底层工作原理">
-<meta property="og:url" content="http://example.com/2015/02/03/SpringMVC%E7%9A%84%E5%BA%95%E5%B1%82%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="6种常见的Git错误以及解决办法">
+<meta property="og:url" content="http://example.com/0206/09/04/6%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84Git%E9%94%99%E8%AF%AF%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E7%9A%84%E5%8A%9E%E6%B3%95/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="下图描述了一个请求在Spring MVC中整个流转的过程：">
+<meta property="og:description" content="我们都会犯错误，尤其是在使用像Git这样复杂的东西时。下面介绍如何解决六个最常见的Git错误。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://r2cex8oik.hn-bkt.clouddn.com/SpringMVC.jpg">
-<meta property="article:published_time" content="2015-02-03T08:11:28.000Z">
-<meta property="article:modified_time" content="2021-12-01T08:19:46.428Z">
+<meta property="article:published_time" content="0206-09-04T11:10:22.000Z">
+<meta property="article:modified_time" content="2021-12-04T11:12:52.226Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
-<meta property="article:tag" content="Spring MVC">
+<meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://r2cex8oik.hn-bkt.clouddn.com/SpringMVC.jpg">
   
     <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
   
@@ -71,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-SpringMVC的底层工作原理" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-6种常见的Git错误以及解决的办法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/02/03/SpringMVC%E7%9A%84%E5%BA%95%E5%B1%82%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" class="article-date">
-  <time datetime="2015-02-03T08:11:28.000Z" itemprop="datePublished">2015-02-03</time>
+    <a href="/0206/09/04/6%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84Git%E9%94%99%E8%AF%AF%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E7%9A%84%E5%8A%9E%E6%B3%95/" class="article-date">
+  <time datetime="0206-09-04T11:10:22.000Z" itemprop="datePublished">0206-09-04</time>
 </a>
     
   <div class="article-category">
@@ -89,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SpringMVC的底层工作原理
+      6种常见的Git错误以及解决办法
     </h1>
   
 
@@ -97,31 +95,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>下图描述了一个请求在Spring MVC中整个流转的过程：</p>
+        <p>我们都会犯错误，尤其是在使用像Git这样复杂的东西时。下面介绍如何解决六个最常见的Git错误。</p>
 <span id="more"></span>
 
-<p><img src="http://r2cex8oik.hn-bkt.clouddn.com/SpringMVC.jpg" alt="Spring MVC 流程"></p>
-<ol>
-<li>⽤户发送请求⾄前端控制器DispatcherServlet。</li>
-<li>DispatcherServlet 收到请求调⽤ HandlerMapping 处理器映射器。</li>
-<li>处理器映射器找到具体的处理器(可以根据 xml 配置、注解进⾏查找)，⽣成处理器及处理器拦截器(如果有则⽣成)⼀并返回给 DispatcherServlet。</li>
-<li>DispatcherServlet 调⽤ HandlerAdapter 处理器适配器。</li>
-<li>HandlerAdapter 经过适配调⽤具体的处理器(Controller，也叫后端控制器)</li>
-<li>Controller 执⾏完成返回 ModelAndView。</li>
-<li>HandlerAdapter 将 controller 执⾏结果 ModelAndView 返回给 DispatcherServlet。</li>
-<li>DispatcherServlet 将 ModelAndView 传给 ViewReslover 视图解析器。</li>
-<li>ViewReslover 解析后返回具体 View。</li>
-<li>DispatcherServlet 根据 View 进⾏渲染视图（即将模型数据填充⾄视图中）。</li>
-<li>DispatcherServlet 响应⽤户。</li>
-</ol>
+<h3 id="1-最后一次代码提交时有拼写错误"><a href="#1-最后一次代码提交时有拼写错误" class="headerlink" title="1. 最后一次代码提交时有拼写错误"></a>1. 最后一次代码提交时有拼写错误</h3><p>经过几个小时的编码后，拼写错误很容易带到你的提交消息里面。 幸运的是，有一个简单的解决方案。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+
+<p>这会打开编辑器，并允许你更改最后一次提交消息。 没有人知道你把“addded”单词多加了一个字母“d”的拼写错误。</p>
+<h3 id="2-忘了在最后一次提交中添加文件"><a href="#2-忘了在最后一次提交中添加文件" class="headerlink" title="2. 忘了在最后一次提交中添加文件"></a>2. 忘了在最后一次提交中添加文件</h3><p>另一个常见的Git陷阱是过早提交。 你少添加了一个文件，忘了保存它，或者需要对最后一次提交做一个小改动才有意义。 <code>--amend</code> 再次成为你的朋友。</p>
+<p>添加错过的文件然后运行该命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add missed-file.txt</span><br><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+<p>此时，可以修改提交消息，也可以只保存它以使其保持不变。</p>
+<h3 id="3-在代码库中添加了一个不想要的文件"><a href="#3-在代码库中添加了一个不想要的文件" class="headerlink" title="3. 在代码库中添加了一个不想要的文件"></a>3. 在代码库中添加了一个不想要的文件</h3><p>但如果你的做法的正好相反呢？如果添加了不想提交的文件怎么办？一个环境文件，一个构建目录，或者是一张图片不小心保存到错误的目录？这都是可以解决的。<br>如果你所做的只是对文件进行了stage操作放入了暂存区，还没有commit本地代码仓库，那么只需重新设置暂存区的文件即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset /assets/img/misty-and-pepper.jpg</span><br></pre></td></tr></table></figure>
+
+<p>如果已经提交了更改，那么需要先运行一个额外的步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD~1</span><br><span class="line">git reset /assets/img/misty-and-pepper.jpg</span><br><span class="line">rm /assets/img/misty-and-pepper.jpg</span><br><span class="line">git commit</span><br></pre></td></tr></table></figure>
+<p>这将撤销提交，删除图片文件，然后在其位置添加一个新的提交。</p>
+<h3 id="4-提交了所有的修改到-master-分支"><a href="#4-提交了所有的修改到-master-分支" class="headerlink" title="4. 提交了所有的修改到 master 分支"></a>4. 提交了所有的修改到 master 分支</h3><p>你正在开发一个新特性，在匆忙之中，忘记为它打开一个新的分支。已经提交了一堆文件，现在它们都位于主分支（master）上。幸运的是，GitLab可以防止你直接推到master 主分支上。因此，我们可以使用以下三个命令将所有这些更改回滚到一个新分支：</p>
+<blockquote>
+<p>Note<br>确保首先commit或stash更改，否则所有更改都将丢失！</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch future-brunch</span><br><span class="line">git reset HEAD~ --hard</span><br><span class="line">git checkout future-brunch</span><br></pre></td></tr></table></figure>
+<p>这会创建一个新分支，然后将主分支回滚到进行更改之前的位置，然后最终检出新分支，并保留所有先前的更改。</p>
+<h3 id="5-分支名称出现了拼写错误"><a href="#5-分支名称出现了拼写错误" class="headerlink" title="5. 分支名称出现了拼写错误"></a>5. 分支名称出现了拼写错误</h3><p>对错误分支进行重命名的方式与用<code>mv</code>命令重命名文件的方式类似：将它移动到一个新的位置，并使用正确的名称。例如把future-brunch分支名称更改为feature-branch。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m future-brunch feature-branch</span><br></pre></td></tr></table></figure>
+
+<p>如果已经push了这个分支到远程代码仓库，那么还需要一些额外的步骤。需要从远程代码仓库删除旧的分支，将新分支 push 上去：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete future-brunch</span><br><span class="line">git push origin feature-branch</span><br></pre></td></tr></table></figure>
+<h3 id="6-重复操作"><a href="#6-重复操作" class="headerlink" title="6. 重复操作"></a>6. 重复操作</h3><p>这个命令适用于一切都出错的地方。 当从Stack Overflow复制粘贴一个太多的解决方案时，<br>代码仓库处于比你一开始时更糟糕的状态。<br><code>git reflog</code>向你显示所有的事情列表。然后，它允许你使用Git的神奇时间旅行技巧，回退到过去的任何时间点。这里应该指出，这是最后的手段，不应该轻易使用。要得到这个列表，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+<p>我们采取的每一步，我们所做的每一个动作，Git都有记录。 在我们的项目上运行该命令得到以下列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">3ff8691 (HEAD -&gt; feature-branch) HEAD@&#123;0&#125;: Branch: renamed refs/heads/future-brunch to refs/heads/feature-branch</span><br><span class="line">3ff8691 (HEAD -&gt; feature-branch) HEAD@&#123;2&#125;: checkout: moving from master to future-brunch</span><br><span class="line">2b7e508 (master) HEAD@&#123;3&#125;: reset: moving to HEAD~</span><br><span class="line">3ff8691 (HEAD -&gt; feature-branch) HEAD@&#123;4&#125;: commit: Adds the client logo</span><br><span class="line">2b7e508 (master) HEAD@&#123;5&#125;: reset: moving to HEAD~1</span><br><span class="line">37a632d HEAD@&#123;6&#125;: commit: Adds the client logo to the project</span><br><span class="line">2b7e508 (master) HEAD@&#123;7&#125;: reset: moving to HEAD</span><br><span class="line">2b7e508 (master) HEAD@&#123;8&#125;: commit (amend): Added contributing info to the site</span><br><span class="line">dfa27a2 HEAD@&#123;9&#125;: reset: moving to HEAD</span><br><span class="line">dfa27a2 HEAD@&#123;10&#125;: commit (amend): Added contributing info to the site</span><br><span class="line">700d0b5 HEAD@&#123;11&#125;: commit: Addded contributing info to the site</span><br><span class="line">efba795 HEAD@&#123;12&#125;: commit (initial): Initial commit</span><br></pre></td></tr></table></figure>
+
+<p>记下最左边的列，因为这是索引。 如果要返回历史记录中的任何一点，请运行以下命令，将<code>&#123;index&#125;</code>替换为该引用，例如<code>dfa27a2</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD@&#123;index&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Note<br>文章原文：<a target="_blank" rel="noopener" href="https://about.gitlab.com/2018/08/08/git-happens/">Git happens! 6 Common Git mistakes and how to fix them</a><br>文章作者：<a target="_blank" rel="noopener" href="https://about.gitlab.com/team/#samdbeckham">Sam Beckham</a></p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2015/02/03/SpringMVC%E7%9A%84%E5%BA%95%E5%B1%82%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" data-id="ckwn9dsy30000jstw27yffbhb" class="article-share-link">Share</a>
+      <a data-url="http://example.com/0206/09/04/6%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84Git%E9%94%99%E8%AF%AF%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E7%9A%84%E5%8A%9E%E6%B3%95/" data-id="ckwrpvts40000dctwhhzx0da3" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-MVC/" rel="tag">Spring MVC</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
 
     </footer>
   </div>
@@ -129,20 +149,15 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/02/11/WebSphere%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2012/11/10/%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E4%B8%8D%E5%90%8C%E4%BB%A5%E5%8F%8A%E7%94%9F%E6%88%90SQL%E6%8F%92%E5%85%A5%E8%AF%AD%E5%8F%A5/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          WebSphere数据源配置
+          比较两个文件不同以及生成SQL插入语句
         
       </div>
     </a>
   
-  
-    <a href="/2015/01/27/Oracle-Client-Language-Problem/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Oracle Client Language Problem</div>
-    </a>
   
 </nav>
 
