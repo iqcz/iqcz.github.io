@@ -5,17 +5,19 @@
   
 
   
-  <title>归档: 2015/3 | 当代十八线浪漫主义码农诗人</title>
+  <title>Redis最佳实践建议 | 当代十八线浪漫主义码农诗人</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java | Code | Book | Algorithm">
-<meta property="og:type" content="website">
-<meta property="og:title" content="当代十八线浪漫主义码农诗人">
-<meta property="og:url" content="http://example.com/archives/2015/03/index.html">
+  <meta name="description" content="下面总结在Redis中总总结的一些最佳实践。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis最佳实践建议">
+<meta property="og:url" content="http://example.com/2021/06/05/Redis%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE/index.html">
 <meta property="og:site_name" content="当代十八线浪漫主义码农诗人">
-<meta property="og:description" content="Java | Code | Book | Algorithm">
+<meta property="og:description" content="下面总结在Redis中总总结的一些最佳实践。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-05T11:49:37.000Z">
+<meta property="article:modified_time" content="2021-12-05T12:54:49.329Z">
 <meta property="article:author" content="公众号：书香颜 | 微信号: phideonvw">
-<meta property="article:tag" content="Java, Code, 程序员, 分布式, 算法">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="当代十八线浪漫主义码农诗人" type="application/atom+xml">
@@ -67,40 +69,67 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/03/21/Oracle%E4%B8%AD%E5%AE%9A%E4%B9%89package%E4%BB%A5%E5%8F%8A%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  <time datetime="2015-03-21T08:46:44.000Z" itemprop="datePublished">3月 21</time>
+        <section id="main"><article id="post-Redis最佳实践建议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/06/05/Redis%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE/" class="article-date">
+  <time datetime="2021-06-05T11:49:37.000Z" itemprop="datePublished">2021-06-05</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/03/21/Oracle%E4%B8%AD%E5%AE%9A%E4%B9%89package%E4%BB%A5%E5%8F%8A%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/">Oracle中定义package以及存储过程的使用</a>
+    <h1 class="article-title" itemprop="name">
+      Redis最佳实践建议
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下面总结在Redis中总总结的一些最佳实践。</p>
+<span id="more"></span>
 
+<h3 id="一-命名规范"><a href="#一-命名规范" class="headerlink" title="一 命名规范"></a>一 命名规范</h3><p>​        简洁性、可区分性、避免特殊字符。使用业务名为前缀，眼红冒号分隔。有子系统时，可以使用多个冒号或者下划线，方便对集群管理。</p>
+<h3 id="二-O-n-复杂度拆分"><a href="#二-O-n-复杂度拆分" class="headerlink" title="二 O(n)复杂度拆分"></a>二 O(n)复杂度拆分</h3><p>​        可预测性、限制增长、避免积压。hscan、sscan、zscan进行渐进操作是利器。hash类元素个数尽量不要超过100，集合类、链表类数据尽量不要超过一万。元素数量过大可考虑拆分多个key进行处理，具体拆分需要看业务逻辑，比如 根据地区拆分、时间拆分、人群特征拆分等。</p>
+<h3 id="三-大value压缩"><a href="#三-大value压缩" class="headerlink" title="三 大value压缩"></a>三 大value压缩</h3><p>​        大key拆分、数据压缩减少超时。分布更均与、避免堵塞服务。超过50Mb，迁移或者删除时间过久，会阻塞服务导致非预期异常。String类型尽量控制在10Kb以内。1Kb是Redis性能的一个拐点。在KV大小超过10Kb、100Kb、1Mb时会出现明显的性能下降。</p>
+<h3 id="四-过期时间设置"><a href="#四-过期时间设置" class="headerlink" title="四 过期时间设置"></a>四 过期时间设置</h3><p>​        合理设置过期时间。内存属于稀缺资源，使用时注意expire和expireat的区别，过期时间设置尽量随机。</p>
+<h3 id="五-批量操作命令"><a href="#五-批量操作命令" class="headerlink" title="五 批量操作命令"></a>五 批量操作命令</h3><p>​        适当使用mget/ mset、pipeline可缩短RTT（Round Trip Time 往返时延）。元素数量建议控制在50个以内，数据包体量控制在1Mb以内。</p>
+<h3 id="六-重试机制和连接配置"><a href="#六-重试机制和连接配置" class="headerlink" title="六 重试机制和连接配置"></a>六 重试机制和连接配置</h3><p>​        长连接性能显著优于短连接，docker客户端建议连接配置在100左右。根据实际情况调整配置。</p>
+<h3 id="七-关闭不必要的请求"><a href="#七-关闭不必要的请求" class="headerlink" title="七 关闭不必要的请求"></a>七 关闭不必要的请求</h3><p>​        关闭TestOnReturn开关，减少Ping消息。利用返回值减少不必要的重复判断。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/06/05/Redis%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE/" data-id="ckwt8yrvw00000otw0b51b204" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/03/Redis%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redis缓存相关问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
